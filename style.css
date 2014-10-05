@@ -1,0 +1,33 @@
+text {
+  fill: #666666;
+}
+/* machine title */
+.cluster  text {
+  fill: #000000;
+}
+/* when there were regions represented as clusters - it wasn't so easy
+   may need to revisit
+ */
+/* machine background */
+.cluster  path {
+  stroke: #000000;
+  fill: #dddddd;
+} 
+ 
+.node path {
+  stroke-width: 2px;
+  stroke: #000000;
+  fill: #ffffff;
+}
+.node text {
+  font-size: 12px;
+}
+/* arrow head */
+.edge polygon {
+  stroke: #555555;
+  fill: #555555;
+}
+/* lines */
+.edge path {
+  stroke: #555555;
+}

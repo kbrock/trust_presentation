@@ -1,0 +1,143 @@
+digraph Enterprise {
+  stylesheet="style.css"
+  rankdir = "TB";
+  /*splines="ortho";*/
+  nodestep="0";
+  smoothing="avg_dist";
+  graph [ ]
+  node [ shape="Mrecord" style="filled" fontname="helvetica"]
+  edge [ dir="back" arrowsize="0.5" fontname="helvetica"]
+  node [ style="filled" fontname="helvetica"]
+  fontname="helvetica:bold";
+
+  /* external auth / web */
+    kdc301 [ id="kdc301" label="{IdM|kdc}" ]
+    ldp301 [ id="ldp301" label="{IdM|ldap}" ]
+
+    cloud2 [ id="cloud2" label="VMWare"
+             shape="custom" shapefile="cloud.svg"
+             color = "none" fillcolor="none" ]
+    iam1   [ id="iam1" label="Amazon\nIAM"
+             shape="custom" shapefile="cloud.svg"
+             color = "none" fillcolor="none" ]
+
+  {
+
+      /*
+          dumbing down this cluster
+          removing basic nodes from here that are also in regional db
+          (same goes with worker app)
+       */
+      subgraph cluster_101 {
+        id="app101"
+        style = "rounded,filled";
+        label = "Master Appliance";
+
+        db101  [ id="db101"  label="DB1" shape="custom" shapefile="db.svg"  color = "none" fillcolor="none" ]
+        ui101  [ id="ui101"  label="{UI|worker}" ]
+        ap101  [ id="ap101"  label="{apache|auth...}" ]
+        /*
+        con101 [ id="con101" label="console" ]
+        ssh101 [ id="ssh101" label="ssh" ]
+        */
+        /* */
+        db101:s -> ui101:n [ id="db101_ui101" ]
+        ui101   -> ap101   [ id="ui101_ap101" ]
+        /*
+        pam101 [ id="pam101" label="{pam|sssd}" ]
+        con101:s -> ssh101:n [ id="con201_ssh101" ]
+        {
+          rank="same";
+          ap101 -> pam101    [ id="ap201_pam201" constraint="true" penwidth="1" dir="forward"]
+          ssh101 -> pam101   [ id="ssh201_pam201" constraint="true" penwidth="1" dir="forward"]
+        }
+
+        { rank="same"; ap101 ssh101 }
+        */
+      }
+
+      subgraph cluster_201 {
+
+        id="app201"
+        style = "rounded,filled";
+        label = "Regional DB Appliance";
+
+        rep201 [ id="rep201" label="{db sync|worker}" ]
+        db201  [ id="db201"  label="DB2" shape="custom" shapefile="db.svg" color = "none" fillcolor="none" ]
+        mem201 [ id="mem201" label="{memcache|session}" ]
+        pam201 [ id="pam201" label="{pam|sssd}" ]
+        ui201  [ id="ui201"  label="{UI|worker}" ]
+
+        con201 [ id="con201" label="console" ]
+        ap201  [ id="ap201"  label="{apache|auth?}" ]
+        ssh201 [ id="ssh201" label="ssh" tooltip="Oh yea!"]
+
+        /* */
+        db201:s  -> ui201:n [ id="db201_ui201" ]
+        ui201:s  -> ap201:n [ id="ui201_ap201" ]
+        mem201:s -> ui201:n   [ id="mem201_ui201" ]
+        con201:s -> ssh201:n [ id="con201_ssh201" ]
+        {
+          rank="same";
+          ap201 -> pam201    [ id="ap201_pam201" constraint="true" penwidth="1" dir="forward"]
+          ssh201 -> pam201   [ id="ssh201_pam201" constraint="true" penwidth="1" dir="forward"]
+        }
+
+        { rank="same"; ap201 ssh201 }
+
+        /* */
+        rep201 -> db201  [ id="rep201_db201" dir="forward" constraint="false" ]
+      }
+
+      subgraph cluster_202 {
+        id="app202"
+        style = "rounded,filled";
+        label = "Worker App";
+
+        node [ style="filled" color="#000000" fillcolor="#ffffff" ]
+        wk202a [ id="wk202a" label="{inventory|worker}" ]
+      }
+  }
+
+  /* put these together on the bottom line */
+
+  
+    user1  [ id="user1" label="User" labelloc="b" fontsize="10"
+             shape="custom" shapefile="user.svg"
+             color = "none" fillcolor="none" ]
+  
+    user2  [ id="user2" label="User" labelloc="b" fontsize="10"
+             shape="custom" shapefile="user.svg"
+             color = "none" fillcolor="none" ]
+
+   
+  /* link 101 to 201 for region to region */ 
+    db101    -> rep201 [ id="db101_rep201" constraint="false" ]
+    ui101:w    -> ui201:e  [ id="ui101_ui201"  constraint="false" dir="both"]
+
+  /* link 201 to 202 (use external database) */
+    db201:s  -> wk202a  [ id="db201_wk202a" ]
+
+  /* users access the system */
+
+    ap101:s  -> user1:n  [ id="ap101_user1"]
+    /*
+    ssh101:s -> user1:n  [ id="ssh101_user1" ]
+    */
+    ap201:s  -> user2:n  [ id="ap201_user2" ]
+    ssh201:s -> user2:n  [ id="ssh201_user2" ]
+
+  /* we access external services */
+    ui201  -> iam1   [ id="iam1_ui201"    dir="forward" constraint="true"]
+    /*wk201 -> cloud2  [ id="cloud2_wk201"  dir="forward" constraint="false" ]*/
+    wk202a -> cloud2 [ id="cloud2_wk202a" dir="forward" constraint="true"]
+
+  { rank="same"; iam1 cloud2 user2 kdc301 ldp301 }
+
+  /* access auth */
+    edge [ penwidth="1"]
+    pam201 -> kdc301 [ constraint="true" dir="forward" ]
+    ui201  -> ldp301 [ constraint="true" dir="forward" ]
+    pam201 -> ldp301 [ constraint="true" dir="forward" ]
+    user2  -> kdc301 [ id="user2_kdc301" constraint="false"dir="forward"]
+}

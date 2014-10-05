@@ -1,0 +1,28 @@
+# Presentation about trust
+
+When one system communicates with another system, there needs to be some form of trust between them.
+
+It may be as simple as being on the same host, so just let anyone through.
+Or it may be super elaborate public/private keys or Kerberose tickets.
+
+This is trying to explain the various components and how that trust is established
+
+---
+
+dotted vs solid
+  optional authentication
+  configuration vs runtime
+  optionally in our infrastructure
+
+change color of database / cloud
+get a key image for kerberos
+get image for vmware / IdM
+
+may want to try out:
+  http://www.petercollingridge.co.uk/blog/svg-optimiser
+
+
+ICONS:
+http://www.flaticon.com/free-icon/cloud-internet-symbol_33415
+http://www.flaticon.com/free-icon/user-outline_55089
+assume database is from there as well
