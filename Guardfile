@@ -1,8 +1,9 @@
 require 'erb'
+#require 'hpricot'
 
 def gensvg(file_name)
   `dot2svg #{file_name}`
-  puts "     #{file_name.sub('.dot','.svg')} created from #{file_name}"
+  puts "    #{file_name.sub('.dot','.svg')} created from #{file_name}"
 end
 
 DEFAULT_DOT='enterprise-single.dot'
@@ -23,6 +24,9 @@ def create_index(dot_filename) # this may be dot or svg
   body.gsub!(/^<\?.*\?>\n/,'')
   body.gsub!(/<!DOC[^>]*>\n/,'')
 
+  # TODO:
+  #body.gsub('user.svg', '#user')
+
   index_contents = template.result(binding)
   File.write(index_filename, index_contents)
   puts "    #{index_filename} created from #{dot_filename}"
@@ -33,7 +37,7 @@ def reload_browser
 end
 
 guard :shell do
-  watch(/.*\.dot/) do |m|
+  watch(DEFAULT_DOT) do |m| #/.*\.dot/
     puts "dot #{m[0]} has changed."
     gensvg(m[0])
     create_index(m[0])
@@ -46,7 +50,7 @@ guard :shell do
     reload_browser
   end
   watch('style.css') do |m|
-    puts "css#{m[0]} has changed."
+    puts "css #{m[0]} has changed."
     reload_browser
   end
 end
