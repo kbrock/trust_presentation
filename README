@@ -5,24 +5,44 @@ When one system communicates with another system, there needs to be some form of
 It may be as simple as being on the same host, so just let anyone through.
 Or it may be super elaborate public/private keys or Kerberose tickets.
 
-This is trying to explain the various components and how that trust is established
+This is trying to explain the various components and how that trust is established.
+
+It is also showing that in the end of the day, all passwords are stored in a file somewhere.
 
 ---
 
-dotted vs solid
-  optional authentication
-  configuration vs runtime
-  optionally in our infrastructure
 
-change color of database / cloud
-get a key image for kerberos
-get image for vmware / IdM
+missing:
+  ReST -> apache (is this different from user -> apache?)
+  -> NFS (other vmdb.yml passwords)
+  User -> console (deprecating)
+  smart proxy / powershell_daemon
+  
+---
 
-may want to try out:
-  http://www.petercollingridge.co.uk/blog/svg-optimiser
+mouse over line:
+  list of options
+    identity user provides
+      password / hostaccess
+    where is user identity stored?
+    where is md5 stored?
+    id to hilight for fetching identity
+  id to alternate workflows (if stored elsewhere)
+
+---
+
+would be nice to include svg in diagram rather than having an external reference
+guard file is poised to do that, but it is not showing the images correctly
+
+after editing user.svg, optimize it (get rid of the extra desc and id)
+currently editing them in iVinci
+
+optimizer: http://petercollingridge.appspot.com/svg-editor
 
 
-ICONS:
-http://www.flaticon.com/free-icon/cloud-internet-symbol_33415
-http://www.flaticon.com/free-icon/user-outline_55089
-assume database is from there as well
+
+### Attribution / Starting point for icons:
+
+- http://www.flaticon.com/free-icon/cloud-internet-symbol_33415
+- http://www.flaticon.com/free-icon/user-outline_55089
+- assume database is from there as well

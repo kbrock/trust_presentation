@@ -1,14 +1,11 @@
 digraph Enterprise {
   stylesheet="style.css"
   rankdir = "TB";
-  /*splines="ortho";*/
-  nodestep="0";
-  smoothing="avg_dist";
-  graph [ ]
-  node [ shape="Mrecord" style="filled" fontname="helvetica"]
-  edge [ dir="back" arrowsize="0.5" fontname="helvetica"]
-  node [ style="filled" fontname="helvetica"]
-  fontname="helvetica:bold";
+  /* splines="ortho"; - want this, but with it you can't use ports */
+
+  graph [ fontname="helvetica-bold" ]
+  node  [ shape="Mrecord" style="filled" fontname="helvetica" fillcolor="#ffffff" penwidth="2" ]
+  edge  [ dir="back" arrowsize="0.5" fontname="helvetica"]
 
   /* external auth / web */
     kdc301 [ id="kdc301" label="{IdM|kdc}" ]
@@ -70,20 +67,18 @@ digraph Enterprise {
 
         con201 [ id="con201" label="console" ]
         ap201  [ id="ap201"  label="{apache|auth?}" ]
-        ssh201 [ id="ssh201" label="ssh" tooltip="Oh yea!"]
+        ssh201 [ id="ssh201" label="ssh" ]
 
         /* */
-        db201:s  -> ui201:n [ id="db201_ui201" ]
-        ui201:s  -> ap201:n [ id="ui201_ap201" ]
-        mem201:s -> ui201:n   [ id="mem201_ui201" ]
+        db201:s  -> ui201:n  [ id="db201_ui201" ]
+        ui201:s  -> ap201:n  [ id="ui201_ap201" ]
+        mem201:s -> ui201:n  [ id="mem201_ui201" ]
         con201:s -> ssh201:n [ id="con201_ssh201" ]
         {
           rank="same";
-          ap201 -> pam201    [ id="ap201_pam201" constraint="true" penwidth="1" dir="forward"]
-          ssh201 -> pam201   [ id="ssh201_pam201" constraint="true" penwidth="1" dir="forward"]
+          ap201  -> pam201   [ id="ap201_pam201"  dir="forward"]
+          ssh201 -> pam201   [ id="ssh201_pam201" dir="forward"]
         }
-
-        { rank="same"; ap201 ssh201 }
 
         /* */
         rep201 -> db201  [ id="rep201_db201" dir="forward" constraint="false" ]
@@ -94,7 +89,6 @@ digraph Enterprise {
         style = "rounded,filled";
         label = "Worker App";
 
-        node [ style="filled" color="#000000" fillcolor="#ffffff" ]
         wk202a [ id="wk202a" label="{inventory|worker}" ]
       }
   }
@@ -112,32 +106,31 @@ digraph Enterprise {
 
    
   /* link 101 to 201 for region to region */ 
-    db101    -> rep201 [ id="db101_rep201" constraint="false" ]
-    ui101:w    -> ui201:e  [ id="ui101_ui201"  constraint="false" dir="both"]
+    db101    -> rep201  [ id="db101_rep201" constraint="false" ]
+    ui101:w  -> ui201:e [ id="ui101_ui201"  dir="both" constraint="false"]
 
   /* link 201 to 202 (use external database) */
     db201:s  -> wk202a  [ id="db201_wk202a" ]
 
   /* users access the system */
 
-    ap101:s  -> user1:n  [ id="ap101_user1"]
+    ap101:s  -> user1:n [ id="ap101_user1"]
     /*
     ssh101:s -> user1:n  [ id="ssh101_user1" ]
     */
-    ap201:s  -> user2:n  [ id="ap201_user2" ]
-    ssh201:s -> user2:n  [ id="ssh201_user2" ]
+    ap201:s  -> user2:n [ id="ap201_user2" ]
+    ssh201:s -> user2:n [ id="ssh201_user2" ]
 
   /* we access external services */
-    ui201  -> iam1   [ id="iam1_ui201"    dir="forward" constraint="true"]
-    /*wk201 -> cloud2  [ id="cloud2_wk201"  dir="forward" constraint="false" ]*/
-    wk202a -> cloud2 [ id="cloud2_wk202a" dir="forward" constraint="true"]
+    ui201    -> iam1    [ id="iam1_ui201"    dir="forward" ]
+    /*wk201 -> cloud2   [ id="cloud2_wk201"  dir="forward" constraint="false" ]*/
+    wk202a   -> cloud2  [ id="cloud2_wk202a" dir="forward" ]
 
   { rank="same"; iam1 cloud2 user2 kdc301 ldp301 }
 
   /* access auth */
-    edge [ penwidth="1"]
-    pam201 -> kdc301 [ constraint="true" dir="forward" ]
-    ui201  -> ldp301 [ constraint="true" dir="forward" ]
-    pam201 -> ldp301 [ constraint="true" dir="forward" ]
-    user2  -> kdc301 [ id="user2_kdc301" constraint="false"dir="forward"]
+    pam201 -> kdc301 [ id="pam201_kdc301"    dir="forward" ]
+    ui201  -> ldp301 [ id="ui201_ldp301"     dir="forward" ]
+    pam201 -> ldp301 [ id="pam201_ldp301"    dir="forward" ]
+    user2  -> kdc301 [ id="user2_kdc301"     dir="forward" constraint="false" ]
 }

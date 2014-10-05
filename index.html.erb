@@ -3,10 +3,80 @@
   <script src="d3.v3.js" charset="utf-8"></script>
   <link rel="stylesheet" href="style.css" type="text/css"></link>
   <style>
+body {
+  font-family: "helvetica";
+}
+#diagram, #desc-wrap {
+  border: 1px solid blue;
+}
+#diagram {
+    float: left;
+    xdisplay: inline-block;
+}
+#desc-wrap {
+  margin: 8px;
+}
+
+#desc {
+  padding: 4px;
+}
+
   </style>
 </head>
 <body>
+  <!--
+    TODO: want to embed these into this - but height/width getting botched
+  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <defs>
+    <g id="user" width="45" height="50">
+      <path d="M31.77 31.35C35.78 28.21 39.46 22.68 39.46 17.19 39.46 7.7 31.73 0 22.19 0 12.65 0 4.91 7.7 4.91 17.19 4.91 22.68 8.81 28.32 12.83 31.46 5.63 35.12 0.56 41.57 0 50.02L1.83 50.02C2.44 42.1 7.61 35.47 14.73 32.68 16.99 33.77 19.51 34.39 22.19 34.39 24.87 34.39 27.39 33.77 29.65 32.68 36.77 35.47 41.94 42.1 42.54 50.02L44.38 50.02C43.82 41.57 38.97 35.01 31.77 31.35M22.19 32.57C14.38 32.57 6.74 24.96 6.74 17.19 6.74 9.42 14.38 1.81 22.19 1.81 30 1.81 37.63 9.42 37.63 17.19 37.63 24.96 30 32.57 22.19 32.57Z"/>
+    </g>
+  </defs>
+</svg>
+<div id="diagram">
 <%= body %>
+</div>
+<div id="desc-wrap">
+  <div id="desc">
+    <p>a</p>
+    <p>b</p>
+  </div>
+</div>
 <script>
+/* selecting an edge is difficult */
+/* instead of relying upon mouseover/mouseout, having mouseover sticky */
+
+var current_node = null;
+
+/* used for hilighting */
+function childNodes(parent) {
+  return d3.select(parent).selectAll("path,polygon,polyline");
+}
+function displayEdge(id) {
+  if(current_node) {
+    var old_ids = current_node.split('_');
+    childNodes("#"+old_ids[0]).style("stroke", "")
+    childNodes("#"+old_ids[1]).style("stroke", "")
+  }
+  current_node = id;
+
+  var ids = id.split('_');
+  d3.select("#desc").html("info about: "+ids[0] +" to "+ids[1]);
+
+  childNodes("#"+ids[0]).style("stroke", "green")
+  childNodes("#"+ids[1]).style("stroke", "green")
+}
+
+d3.selectAll(".node").on('mouseover', function() {
+  childNodes(this).style("stroke", "red");
+}).on('mouseout', function() {
+  childNodes(this).style("stroke", "");
+});
+
+d3.selectAll(".edge").on('mouseover', function() {
+  console.debug('over edge', this.id);
+  displayEdge(this.id);
+}); 
 </script>
 </body>

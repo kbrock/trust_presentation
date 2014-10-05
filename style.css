@@ -5,9 +5,7 @@ text {
 .cluster  text {
   fill: #000000;
 }
-/* when there were regions represented as clusters - it wasn't so easy
-   may need to revisit
- */
+
 /* machine background */
 .cluster  path {
   stroke: #000000;
@@ -22,12 +20,13 @@ text {
 .node text {
   font-size: 12px;
 }
+
 /* arrow head */
 .edge polygon {
-  stroke: #555555;
-  fill: #555555;
+  stroke: #996600;
+  fill: #996600;
 }
 /* lines */
 .edge path {
-  stroke: #555555;
+  stroke: #996600;
 }
