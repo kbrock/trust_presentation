@@ -2,26 +2,6 @@
   <title><%= svg_filename %></title>
   <script src="d3.v3.js" charset="utf-8"></script>
   <link rel="stylesheet" href="style.css" type="text/css"></link>
-  <style>
-body {
-  font-family: "helvetica";
-}
-#diagram, #desc-wrap {
-  border: 1px solid blue;
-}
-#diagram {
-    float: left;
-    xdisplay: inline-block;
-}
-#desc-wrap {
-  margin: 8px;
-}
-
-#desc {
-  padding: 4px;
-}
-
-  </style>
 </head>
 <body>
   <!--
@@ -59,14 +39,14 @@ function displayEdge(id) {
     return;
   if(current_node) {
     var old_ids = current_node.split('_');
-    childNodes("#"+old_ids[0]).style("stroke", "")
-    childNodes("#"+old_ids[1]).style("stroke", "")
+    d3.select("#"+ids[0]).classed('src', false)
+    d3.select("#"+ids[1]).classed('dest', false)
   }
   current_node = id;
 
   var ids = id.split('_');
-  childNodes("#"+ids[0]).style("stroke", "green")
-  childNodes("#"+ids[1]).style("stroke", "green")
+  d3.select("#"+ids[0]).classed('src', true)
+  d3.select("#"+ids[1]).classed('dest', true)
 
   var info = d3.select("#"+id+" a")
   if (info)
@@ -78,9 +58,9 @@ function displayEdge(id) {
 }
 
 d3.selectAll(".node").on('mouseover', function() {
-  childNodes(this).style("stroke", "red");
+  d3.select(this).classed('active', true)
 }).on('mouseout', function() {
-  childNodes(this).style("stroke", "");
+  d3.select(this).classed('active', false)
 });
 
 d3.selectAll(".edge").on('mouseover', function() {

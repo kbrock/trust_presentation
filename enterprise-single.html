@@ -2,26 +2,6 @@
   <title>enterprise-single.svg</title>
   <script src="d3.v3.js" charset="utf-8"></script>
   <link rel="stylesheet" href="style.css" type="text/css"></link>
-  <style>
-body {
-  font-family: "helvetica";
-}
-#diagram, #desc-wrap {
-  border: 1px solid blue;
-}
-#diagram {
-    float: left;
-    xdisplay: inline-block;
-}
-#desc-wrap {
-  margin: 8px;
-}
-
-#desc {
-  padding: 4px;
-}
-
-  </style>
 </head>
 <body>
   <!--
@@ -49,8 +29,8 @@ body {
 <text text-anchor="middle" x="549" y="-329.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="14.00">Master Appliance</text>
 </g>
 <g id="app201" class="cluster"><title>cluster_201</title>
-<path fill="lightgrey" stroke="black" d="M76,-75C76,-75 318,-75 318,-75 324,-75 330,-81 330,-87 330,-87 330,-333 330,-333 330,-339 324,-345 318,-345 318,-345 76,-345 76,-345 70,-345 64,-339 64,-333 64,-333 64,-87 64,-87 64,-81 70,-75 76,-75"/>
-<text text-anchor="middle" x="197" y="-329.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="14.00">Regional DB Appliance</text>
+<path fill="lightgrey" stroke="black" d="M63,-75C63,-75 305,-75 305,-75 311,-75 317,-81 317,-87 317,-87 317,-333 317,-333 317,-339 311,-345 305,-345 305,-345 63,-345 63,-345 57,-345 51,-339 51,-333 51,-333 51,-87 51,-87 51,-81 57,-75 63,-75"/>
+<text text-anchor="middle" x="184" y="-329.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="14.00">Regional DB Appliance</text>
 </g>
 <g id="app202" class="cluster"><title>cluster_202</title>
 <path fill="lightgrey" stroke="black" d="M391,-158C391,-158 463,-158 463,-158 469,-158 475,-164 475,-170 475,-170 475,-232 475,-232 475,-238 469,-244 463,-244 463,-244 391,-244 391,-244 385,-244 379,-238 379,-232 379,-232 379,-170 379,-170 379,-164 385,-158 391,-158"/>
@@ -75,7 +55,7 @@ body {
 <g id="a_cloud2"><a xlink:title="VMWare, OpenStack, Etc">
 <polygon fill="none" stroke="none" stroke-width="2" points="486.5,-46.5 405.5,-46.5 405.5,-0.5 486.5,-0.5 486.5,-46.5"/>
 <image xlink:href="cloud.svg" width="81px" height="46px" preserveAspectRatio="xMinYMin meet" x="405.5" y="-46.5"/>
-<text text-anchor="middle" x="446" y="-19.8" font-family="Helvetica,sans-Serif" font-size="14.00">VMWare</text>
+<text text-anchor="middle" x="446" y="-19.8" font-family="Helvetica,sans-Serif" font-size="14.00">Provider</text>
 </a>
 </g>
 </g>
@@ -113,18 +93,18 @@ body {
 <!-- rep201 -->
 <g id="rep201" class="node"><title>rep201</title>
 <g id="a_rep201"><a xlink:title="Ruby replication worker">
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M268.5,-260C268.5,-260 309.5,-260 309.5,-260 315.5,-260 321.5,-266 321.5,-272 321.5,-272 321.5,-294 321.5,-294 321.5,-300 315.5,-306 309.5,-306 309.5,-306 268.5,-306 268.5,-306 262.5,-306 256.5,-300 256.5,-294 256.5,-294 256.5,-272 256.5,-272 256.5,-266 262.5,-260 268.5,-260"/>
-<text text-anchor="middle" x="289" y="-290.8" font-family="Helvetica,sans-Serif" font-size="14.00">db sync</text>
-<polyline fill="none" stroke="black" stroke-width="2" points="256.5,-283 321.5,-283 "/>
-<text text-anchor="middle" x="289" y="-267.8" font-family="Helvetica,sans-Serif" font-size="14.00">worker</text>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M255.5,-260C255.5,-260 296.5,-260 296.5,-260 302.5,-260 308.5,-266 308.5,-272 308.5,-272 308.5,-294 308.5,-294 308.5,-300 302.5,-306 296.5,-306 296.5,-306 255.5,-306 255.5,-306 249.5,-306 243.5,-300 243.5,-294 243.5,-294 243.5,-272 243.5,-272 243.5,-266 249.5,-260 255.5,-260"/>
+<text text-anchor="middle" x="276" y="-290.8" font-family="Helvetica,sans-Serif" font-size="14.00">db sync</text>
+<polyline fill="none" stroke="black" stroke-width="2" points="243.5,-283 308.5,-283 "/>
+<text text-anchor="middle" x="276" y="-267.8" font-family="Helvetica,sans-Serif" font-size="14.00">worker</text>
 </a>
 </g>
 </g>
 <!-- db101&#45;&gt;rep201 -->
 <g id="db101_rep201" class="edge"><title>db101&#45;&gt;rep201</title>
-<g id="a_db101_rep201"><a xlink:title="password from file:vmdb.yml">
-<path fill="none" stroke="black" d="M512.567,-283C448.963,-283 385.358,-283 321.754,-283"/>
-<polygon fill="black" stroke="black" points="512.931,-284.75 517.931,-283 512.931,-281.25 512.931,-284.75"/>
+<g id="a_db101_rep201"><a xlink:title="client(rep201): file:vmdb.yml:v2_key. server(db101): file:pg_shadow:md5(password). configure(rep201): ui201. configure(db101): exe:console">
+<path fill="none" stroke="black" d="M512.225,-283C444.325,-283 376.425,-283 308.525,-283"/>
+<polygon fill="black" stroke="black" points="512.532,-284.75 517.532,-283 512.532,-281.25 512.532,-284.75"/>
 </a>
 </g>
 </g>
@@ -145,17 +125,17 @@ body {
 </g>
 <!-- ui201 -->
 <g id="ui201" class="node"><title>ui201</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M156.5,-166.5C156.5,-166.5 191.5,-166.5 191.5,-166.5 197.5,-166.5 203.5,-172.5 203.5,-178.5 203.5,-178.5 203.5,-200.5 203.5,-200.5 203.5,-206.5 197.5,-212.5 191.5,-212.5 191.5,-212.5 156.5,-212.5 156.5,-212.5 150.5,-212.5 144.5,-206.5 144.5,-200.5 144.5,-200.5 144.5,-178.5 144.5,-178.5 144.5,-172.5 150.5,-166.5 156.5,-166.5"/>
-<text text-anchor="middle" x="174" y="-197.3" font-family="Helvetica,sans-Serif" font-size="14.00">UI</text>
-<polyline fill="none" stroke="black" stroke-width="2" points="144.5,-189.5 203.5,-189.5 "/>
-<text text-anchor="middle" x="174" y="-174.3" font-family="Helvetica,sans-Serif" font-size="14.00">worker</text>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M143.5,-166.5C143.5,-166.5 178.5,-166.5 178.5,-166.5 184.5,-166.5 190.5,-172.5 190.5,-178.5 190.5,-178.5 190.5,-200.5 190.5,-200.5 190.5,-206.5 184.5,-212.5 178.5,-212.5 178.5,-212.5 143.5,-212.5 143.5,-212.5 137.5,-212.5 131.5,-206.5 131.5,-200.5 131.5,-200.5 131.5,-178.5 131.5,-178.5 131.5,-172.5 137.5,-166.5 143.5,-166.5"/>
+<text text-anchor="middle" x="161" y="-197.3" font-family="Helvetica,sans-Serif" font-size="14.00">UI</text>
+<polyline fill="none" stroke="black" stroke-width="2" points="131.5,-189.5 190.5,-189.5 "/>
+<text text-anchor="middle" x="161" y="-174.3" font-family="Helvetica,sans-Serif" font-size="14.00">worker</text>
 </g>
 <!-- ui101&#45;&gt;ui201 -->
 <g id="ui101_ui201" class="edge"><title>ui101:w&#45;&gt;ui201:e</title>
-<g id="a_ui101_ui201"><a xlink:title="user/password from file:v2_key">
-<path fill="none" stroke="black" d="M513.519,-191.758C503.509,-201.849 495.679,-242.551 470,-248 456.468,-250.872 234.532,-250.872 221,-248 216.718,-247.091 214.615,-247.511 212,-244 205.846,-235.737 213.786,-202.619 209.083,-192.471"/>
+<g id="a_ui101_ui201"><a xlink:title="client(ui201): file:v2_key:password, server(ui101): file:v2_key:password">
+<path fill="none" stroke="black" d="M513.519,-191.758C503.509,-201.849 495.679,-242.551 470,-248 455.762,-251.022 222.238,-251.022 208,-248 203.718,-247.091 201.615,-247.511 199,-244 192.846,-235.737 200.786,-202.619 196.083,-192.471"/>
 <polygon fill="black" stroke="black" points="514.322,-193.313 518,-189.5 512.747,-190.187 514.322,-193.313"/>
-<polygon fill="black" stroke="black" points="210.073,-191.026 205,-189.5 208.014,-193.857 210.073,-191.026"/>
+<polygon fill="black" stroke="black" points="197.073,-191.026 192,-189.5 195.014,-193.857 197.073,-191.026"/>
 </a>
 </g>
 </g>
@@ -178,23 +158,23 @@ body {
 </g>
 <!-- db201 -->
 <g id="db201" class="node"><title>db201</title>
-<polygon fill="none" stroke="none" stroke-width="2" points="238,-314 176,-314 176,-252 238,-252 238,-314"/>
-<image xlink:href="db.svg" width="62px" height="62px" preserveAspectRatio="xMinYMin meet" x="176" y="-314"/>
-<text text-anchor="middle" x="207" y="-279.3" font-family="Helvetica,sans-Serif" font-size="14.00">DB2</text>
+<polygon fill="none" stroke="none" stroke-width="2" points="225,-314 163,-314 163,-252 225,-252 225,-314"/>
+<image xlink:href="db.svg" width="62px" height="62px" preserveAspectRatio="xMinYMin meet" x="163" y="-314"/>
+<text text-anchor="middle" x="194" y="-279.3" font-family="Helvetica,sans-Serif" font-size="14.00">DB2</text>
 </g>
 <!-- rep201&#45;&gt;db201 -->
 <g id="rep201_db201" class="edge"><title>rep201&#45;&gt;db201</title>
 <g id="a_rep201_db201"><a xlink:title="host access (database.yml)">
-<path fill="none" stroke="black" d="M256.373,-283C251.988,-283 247.603,-283 243.218,-283"/>
-<polygon fill="black" stroke="black" points="243.07,-281.25 238.07,-283 243.07,-284.75 243.07,-281.25"/>
+<path fill="none" stroke="black" d="M243.373,-283C238.988,-283 234.603,-283 230.218,-283"/>
+<polygon fill="black" stroke="black" points="230.07,-281.25 225.07,-283 230.07,-284.75 230.07,-281.25"/>
 </a>
 </g>
 </g>
 <!-- db201&#45;&gt;ui201 -->
 <g id="db201_ui201" class="edge"><title>db201:s&#45;&gt;ui201:n</title>
 <g id="a_db201_ui201"><a xlink:title="host access (no password in databse.yml)">
-<path fill="none" stroke="black" d="M206.311,-246.798C201.572,-230.378 174,-234.1 174,-213.5"/>
-<polygon fill="black" stroke="black" points="204.608,-247.273 207,-252 208.078,-246.813 204.608,-247.273"/>
+<path fill="none" stroke="black" d="M193.311,-246.798C188.572,-230.378 161,-234.1 161,-213.5"/>
+<polygon fill="black" stroke="black" points="191.608,-247.273 194,-252 195.078,-246.813 191.608,-247.273"/>
 </a>
 </g>
 </g>
@@ -207,101 +187,106 @@ body {
 </g>
 <!-- db201&#45;&gt;wk202a -->
 <g id="db201_wk202a" class="edge"><title>db201:s&#45;&gt;wk202a</title>
-<g id="a_db201_wk202a"><a xlink:title="password from file:database.yml md5(password) form file:pg_shadow">
-<path fill="none" stroke="black" d="M210.536,-248.294C229.822,-239.857 321.889,-247.647 334,-244 356.473,-237.233 379.353,-224.167 396.796,-212.642"/>
-<polygon fill="black" stroke="black" points="209.185,-247.174 207,-252 211.718,-249.59 209.185,-247.174"/>
+<g id="a_db201_wk202a"><a xlink:title="client(wk202a): file:database.yml:password. server(db201): file:pg_shadow:md5(password). client_config: exe:console">
+<path fill="none" stroke="black" d="M197.533,-248.283C216.802,-239.787 308.794,-247.315 321,-244 346.066,-237.193 372.136,-224.127 392.149,-212.611"/>
+<polygon fill="black" stroke="black" points="196.176,-247.17 194,-252 198.713,-249.581 196.176,-247.17"/>
 </a>
 </g>
 </g>
 <!-- mem201 -->
 <g id="mem201" class="node"><title>mem201</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M84.5,-260C84.5,-260 145.5,-260 145.5,-260 151.5,-260 157.5,-266 157.5,-272 157.5,-272 157.5,-294 157.5,-294 157.5,-300 151.5,-306 145.5,-306 145.5,-306 84.5,-306 84.5,-306 78.5,-306 72.5,-300 72.5,-294 72.5,-294 72.5,-272 72.5,-272 72.5,-266 78.5,-260 84.5,-260"/>
-<text text-anchor="middle" x="115" y="-290.8" font-family="Helvetica,sans-Serif" font-size="14.00">memcache</text>
-<polyline fill="none" stroke="black" stroke-width="2" points="72.5,-283 157.5,-283 "/>
-<text text-anchor="middle" x="115" y="-267.8" font-family="Helvetica,sans-Serif" font-size="14.00">session</text>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M71.5,-260C71.5,-260 132.5,-260 132.5,-260 138.5,-260 144.5,-266 144.5,-272 144.5,-272 144.5,-294 144.5,-294 144.5,-300 138.5,-306 132.5,-306 132.5,-306 71.5,-306 71.5,-306 65.5,-306 59.5,-300 59.5,-294 59.5,-294 59.5,-272 59.5,-272 59.5,-266 65.5,-260 71.5,-260"/>
+<text text-anchor="middle" x="102" y="-290.8" font-family="Helvetica,sans-Serif" font-size="14.00">memcache</text>
+<polyline fill="none" stroke="black" stroke-width="2" points="59.5,-283 144.5,-283 "/>
+<text text-anchor="middle" x="102" y="-267.8" font-family="Helvetica,sans-Serif" font-size="14.00">session</text>
 </g>
 <!-- mem201&#45;&gt;ui201 -->
 <g id="mem201_ui201" class="edge"><title>mem201:s&#45;&gt;ui201:n</title>
 <g id="a_mem201_ui201"><a xlink:title="host access (firewall)">
-<path fill="none" stroke="black" d="M115.584,-253.712C121.712,-228.13 174,-244.674 174,-213.5"/>
-<polygon fill="black" stroke="black" points="113.809,-253.838 115,-259 117.288,-254.222 113.809,-253.838"/>
+<path fill="none" stroke="black" d="M102.584,-253.712C108.712,-228.13 161,-244.674 161,-213.5"/>
+<polygon fill="black" stroke="black" points="100.809,-253.838 102,-259 104.288,-254.222 100.809,-253.838"/>
 </a>
 </g>
 </g>
 <!-- pam201 -->
 <g id="pam201" class="node"><title>pam201</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M84,-83.5C84,-83.5 114,-83.5 114,-83.5 120,-83.5 126,-89.5 126,-95.5 126,-95.5 126,-117.5 126,-117.5 126,-123.5 120,-129.5 114,-129.5 114,-129.5 84,-129.5 84,-129.5 78,-129.5 72,-123.5 72,-117.5 72,-117.5 72,-95.5 72,-95.5 72,-89.5 78,-83.5 84,-83.5"/>
-<text text-anchor="middle" x="99" y="-114.3" font-family="Helvetica,sans-Serif" font-size="14.00">pam</text>
-<polyline fill="none" stroke="black" stroke-width="2" points="72,-106.5 126,-106.5 "/>
-<text text-anchor="middle" x="99" y="-91.3" font-family="Helvetica,sans-Serif" font-size="14.00">sssd</text>
-</g>
-<!-- pam201&#45;&gt;kdc301 -->
-<g id="pam201_kdc301" class="edge"><title>pam201&#45;&gt;kdc301</title>
-<g id="a_pam201_kdc301"><a xlink:title="file:keytab config ipa&#45;client">
-<path fill="none" stroke="black" d="M99,-83.3664C99,-73.6337 99,-62.1057 99,-51.8424"/>
-<polygon fill="black" stroke="black" points="100.75,-51.6068 99,-46.6068 97.2501,-51.6069 100.75,-51.6068"/>
-</a>
-</g>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M71,-83.5C71,-83.5 101,-83.5 101,-83.5 107,-83.5 113,-89.5 113,-95.5 113,-95.5 113,-117.5 113,-117.5 113,-123.5 107,-129.5 101,-129.5 101,-129.5 71,-129.5 71,-129.5 65,-129.5 59,-123.5 59,-117.5 59,-117.5 59,-95.5 59,-95.5 59,-89.5 65,-83.5 71,-83.5"/>
+<text text-anchor="middle" x="86" y="-114.3" font-family="Helvetica,sans-Serif" font-size="14.00">pam</text>
+<polyline fill="none" stroke="black" stroke-width="2" points="59,-106.5 113,-106.5 "/>
+<text text-anchor="middle" x="86" y="-91.3" font-family="Helvetica,sans-Serif" font-size="14.00">sssd</text>
 </g>
 <!-- pam201&#45;&gt;ldp301 -->
 <g id="pam201_ldp301" class="edge"><title>pam201&#45;&gt;ldp301</title>
-<path fill="none" stroke="black" d="M79.3257,-83.3664C70.2776,-73.1873 59.4838,-61.0443 50.0563,-50.4383"/>
-<polygon fill="black" stroke="black" points="51.2804,-49.1813 46.6505,-46.6068 48.6644,-51.5066 51.2804,-49.1813"/>
+<g id="a_pam201_ldp301"><a xlink:title="password from ">
+<path fill="none" stroke="black" d="M69.878,-83.3664C62.5286,-73.2765 53.7737,-61.2572 46.0969,-50.7177"/>
+<polygon fill="black" stroke="black" points="47.4609,-49.618 43.1025,-46.6068 44.6318,-51.6787 47.4609,-49.618"/>
+</a>
+</g>
 </g>
 <!-- ui201&#45;&gt;ldp301 -->
 <g id="ui201_ldp301" class="edge"><title>ui201&#45;&gt;ldp301</title>
 <g id="a_ui201_ldp301"><a xlink:title="password from file:vmdb.ymlconfig:ui201">
-<path fill="none" stroke="black" d="M144.085,-179.667C119.151,-170.863 84.3733,-155.002 63,-130 43.9435,-107.708 34.8335,-74.8397 30.5717,-51.7277"/>
-<polygon fill="black" stroke="black" points="32.2707,-51.2839 29.6857,-46.66 28.823,-51.8867 32.2707,-51.2839"/>
+<path fill="none" stroke="black" d="M131.351,-180.594C105.883,-172.243 70.1754,-156.528 50,-130 32.8033,-107.389 27.9065,-74.5791 26.7735,-51.5683"/>
+<polygon fill="black" stroke="black" points="28.5204,-51.4523 26.5773,-46.5241 25.023,-51.5884 28.5204,-51.4523"/>
 </a>
 </g>
 </g>
 <!-- ui201&#45;&gt;iam1 -->
 <g id="iam1_ui201" class="edge"><title>ui201&#45;&gt;iam1</title>
 <g id="a_iam1_ui201"><a xlink:title="password from db101 config via ui101 md(password) from file:x">
-<path fill="none" stroke="black" d="M199.358,-166.305C203.435,-163.288 207.724,-160.406 212,-158 243.735,-140.142 261.348,-153.694 289,-130 313.45,-109.051 329.476,-75.1136 338.363,-51.4044"/>
-<polygon fill="black" stroke="black" points="340.079,-51.8057 340.151,-46.5087 336.792,-50.6046 340.079,-51.8057"/>
+<path fill="none" stroke="black" d="M186.358,-166.305C190.435,-163.288 194.724,-160.406 199,-158 230.735,-140.142 247.313,-152.43 276,-130 302.904,-108.964 323.217,-74.8305 335.082,-51.108"/>
+<polygon fill="black" stroke="black" points="336.708,-51.7686 337.342,-46.5093 333.566,-50.225 336.708,-51.7686"/>
 </a>
 </g>
 </g>
 <!-- ap201 -->
 <g id="ap201" class="node"><title>ap201</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M156,-83.5C156,-83.5 194,-83.5 194,-83.5 200,-83.5 206,-89.5 206,-95.5 206,-95.5 206,-117.5 206,-117.5 206,-123.5 200,-129.5 194,-129.5 194,-129.5 156,-129.5 156,-129.5 150,-129.5 144,-123.5 144,-117.5 144,-117.5 144,-95.5 144,-95.5 144,-89.5 150,-83.5 156,-83.5"/>
-<text text-anchor="middle" x="175" y="-114.3" font-family="Helvetica,sans-Serif" font-size="14.00">apache</text>
-<polyline fill="none" stroke="black" stroke-width="2" points="144,-106.5 206,-106.5 "/>
-<text text-anchor="middle" x="175" y="-91.3" font-family="Helvetica,sans-Serif" font-size="14.00">auth?</text>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M143,-83.5C143,-83.5 181,-83.5 181,-83.5 187,-83.5 193,-89.5 193,-95.5 193,-95.5 193,-117.5 193,-117.5 193,-123.5 187,-129.5 181,-129.5 181,-129.5 143,-129.5 143,-129.5 137,-129.5 131,-123.5 131,-117.5 131,-117.5 131,-95.5 131,-95.5 131,-89.5 137,-83.5 143,-83.5"/>
+<text text-anchor="middle" x="162" y="-114.3" font-family="Helvetica,sans-Serif" font-size="14.00">apache</text>
+<polyline fill="none" stroke="black" stroke-width="2" points="131,-106.5 193,-106.5 "/>
+<text text-anchor="middle" x="162" y="-91.3" font-family="Helvetica,sans-Serif" font-size="14.00">auth?</text>
 </g>
 <!-- ui201&#45;&gt;ap201 -->
 <g id="ui201_ap201" class="edge"><title>ui201:s&#45;&gt;ap201:n</title>
 <g id="a_ui201_ap201"><a xlink:title="host access">
-<path fill="none" stroke="black" d="M174.038,-160.401C174.221,-148.632 175,-143.934 175,-130"/>
-<polygon fill="black" stroke="black" points="172.287,-160.487 174,-165.5 175.787,-160.513 172.287,-160.487"/>
+<path fill="none" stroke="black" d="M161.038,-160.401C161.221,-148.632 162,-143.934 162,-130"/>
+<polygon fill="black" stroke="black" points="159.287,-160.487 161,-165.5 162.787,-160.513 159.287,-160.487"/>
 </a>
 </g>
 </g>
 <!-- con201 -->
 <g id="con201" class="node"><title>con201</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M233.5,-171.5C233.5,-171.5 274.5,-171.5 274.5,-171.5 280.5,-171.5 286.5,-177.5 286.5,-183.5 286.5,-183.5 286.5,-195.5 286.5,-195.5 286.5,-201.5 280.5,-207.5 274.5,-207.5 274.5,-207.5 233.5,-207.5 233.5,-207.5 227.5,-207.5 221.5,-201.5 221.5,-195.5 221.5,-195.5 221.5,-183.5 221.5,-183.5 221.5,-177.5 227.5,-171.5 233.5,-171.5"/>
-<text text-anchor="middle" x="254" y="-185.8" font-family="Helvetica,sans-Serif" font-size="14.00">console</text>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M220.5,-166.5C220.5,-166.5 261.5,-166.5 261.5,-166.5 267.5,-166.5 273.5,-172.5 273.5,-178.5 273.5,-178.5 273.5,-200.5 273.5,-200.5 273.5,-206.5 267.5,-212.5 261.5,-212.5 261.5,-212.5 220.5,-212.5 220.5,-212.5 214.5,-212.5 208.5,-206.5 208.5,-200.5 208.5,-200.5 208.5,-178.5 208.5,-178.5 208.5,-172.5 214.5,-166.5 220.5,-166.5"/>
+<text text-anchor="middle" x="241" y="-197.3" font-family="Helvetica,sans-Serif" font-size="14.00">console</text>
+<polyline fill="none" stroke="black" stroke-width="2" points="208.5,-189.5 273.5,-189.5 "/>
+<text text-anchor="middle" x="241" y="-174.3" font-family="Helvetica,sans-Serif" font-size="14.00">rake,cli</text>
 </g>
 <!-- ssh201 -->
 <g id="ssh201" class="node"><title>ssh201</title>
-<path fill="#ffffff" stroke="black" stroke-width="2" d="M238,-88.5C238,-88.5 268,-88.5 268,-88.5 274,-88.5 280,-94.5 280,-100.5 280,-100.5 280,-112.5 280,-112.5 280,-118.5 274,-124.5 268,-124.5 268,-124.5 238,-124.5 238,-124.5 232,-124.5 226,-118.5 226,-112.5 226,-112.5 226,-100.5 226,-100.5 226,-94.5 232,-88.5 238,-88.5"/>
-<text text-anchor="middle" x="253" y="-102.8" font-family="Helvetica,sans-Serif" font-size="14.00">ssh</text>
+<path fill="#ffffff" stroke="black" stroke-width="2" d="M225,-88.5C225,-88.5 255,-88.5 255,-88.5 261,-88.5 267,-94.5 267,-100.5 267,-100.5 267,-112.5 267,-112.5 267,-118.5 261,-124.5 255,-124.5 255,-124.5 225,-124.5 225,-124.5 219,-124.5 213,-118.5 213,-112.5 213,-112.5 213,-100.5 213,-100.5 213,-94.5 219,-88.5 225,-88.5"/>
+<text text-anchor="middle" x="240" y="-102.8" font-family="Helvetica,sans-Serif" font-size="14.00">ssh</text>
 </g>
 <!-- con201&#45;&gt;ssh201 -->
 <g id="con201_ssh201" class="edge"><title>con201:s&#45;&gt;ssh201:n</title>
 <g id="a_con201_ssh201"><a xlink:title="user@host access">
-<path fill="none" stroke="black" d="M253.975,-165.245C253.821,-149.427 253,-143.629 253,-125.5"/>
-<polygon fill="black" stroke="black" points="252.226,-165.508 254,-170.5 255.726,-165.492 252.226,-165.508"/>
+<path fill="none" stroke="black" d="M240.971,-160.467C240.807,-146.678 240,-141.477 240,-125.5"/>
+<polygon fill="black" stroke="black" points="239.221,-160.51 241,-165.5 242.721,-160.49 239.221,-160.51"/>
+</a>
+</g>
+</g>
+<!-- ap201&#45;&gt;kdc301 -->
+<g id="ap201_kdc301" class="edge"><title>ap201&#45;&gt;kdc301</title>
+<g id="a_ap201_kdc301"><a xlink:title="file:keytab config ipa&#45;client">
+<path fill="none" stroke="black" d="M144.785,-83.3664C136.937,-73.2765 127.589,-61.2572 119.392,-50.7177"/>
+<polygon fill="black" stroke="black" points="120.645,-49.4792 116.194,-46.6068 117.883,-51.628 120.645,-49.4792"/>
 </a>
 </g>
 </g>
 <!-- ap201&#45;&gt;pam201 -->
 <g id="ap201_pam201" class="edge"><title>ap201&#45;&gt;pam201</title>
 <g id="a_ap201_pam201"><a xlink:title="host access">
-<path fill="none" stroke="black" d="M143.619,-106.5C139.494,-106.5 135.368,-106.5 131.242,-106.5"/>
-<polygon fill="black" stroke="black" points="131.016,-104.75 126.016,-106.5 131.016,-108.25 131.016,-104.75"/>
+<path fill="none" stroke="black" d="M130.619,-106.5C126.494,-106.5 122.368,-106.5 118.242,-106.5"/>
+<polygon fill="black" stroke="black" points="118.016,-104.75 113.016,-106.5 118.016,-108.25 118.016,-104.75"/>
 </a>
 </g>
 </g>
@@ -310,15 +295,15 @@ body {
 <g id="a_userp"><a xlink:title="User with Password">
 <polygon fill="none" stroke="none" stroke-width="2" points="234,-41.5 198,-41.5 198,-5.5 234,-5.5 234,-41.5"/>
 <image xlink:href="user.svg" width="34px" height="36px" preserveAspectRatio="xMinYMin meet" x="199" y="-41.5"/>
-<text text-anchor="middle" x="216" y="-8.5" font-family="Helvetica,sans-Serif" font-size="10.00">usr:p</text>
+<text text-anchor="middle" x="216" y="-8.5" font-family="Helvetica,sans-Serif" font-size="10.00">pass</text>
 </a>
 </g>
 </g>
 <!-- ap201&#45;&gt;userp -->
 <g id="ap201_userp" class="edge"><title>ap201:s&#45;&gt;userp:n</title>
-<g id="a_ap201_userp"><a xlink:title="password from user, no checking, ui201 gets db201:md5(password) use file:database.yml to access db201. config via console">
-<path fill="none" stroke="black" d="M175.712,-77.1647C181.156,-58.5258 216,-65.9689 216,-42.5"/>
-<polygon fill="black" stroke="black" points="173.926,-77.3125 175,-82.5 177.396,-77.7753 173.926,-77.3125"/>
+<g id="a_ap201_userp"><a xlink:title="client: user:password, server(ap201): proxy, server(ui201): db201_wk202a:md5(password)">
+<path fill="none" stroke="black" d="M162.606,-77.4569C168.539,-54.9058 216,-70.5005 216,-42.5"/>
+<polygon fill="black" stroke="black" points="160.86,-77.3268 162,-82.5 164.335,-77.7447 160.86,-77.3268"/>
 </a>
 </g>
 </g>
@@ -327,31 +312,31 @@ body {
 <g id="a_userk"><a xlink:title="User With Kerberos Ticket">
 <polygon fill="none" stroke="none" stroke-width="2" points="180,-41.5 144,-41.5 144,-5.5 180,-5.5 180,-41.5"/>
 <image xlink:href="user.svg" width="34px" height="36px" preserveAspectRatio="xMinYMin meet" x="145" y="-41.5"/>
-<text text-anchor="middle" x="162" y="-8.5" font-family="Helvetica,sans-Serif" font-size="10.00">usr:k</text>
+<text text-anchor="middle" x="162" y="-8.5" font-family="Helvetica,sans-Serif" font-size="10.00">sso</text>
 </a>
 </g>
 </g>
 <!-- ap201&#45;&gt;userk -->
 <g id="ap201_userk" class="edge"><title>ap201:s&#45;&gt;userk:n</title>
-<g id="a_ap201_userk"><a xlink:title="token from file:keytab, server fetches from pam(?) server verifies. client config via kinit, server config via console (ipconfig?)">
-<path fill="none" stroke="black" d="M174.625,-77.2683C172.493,-63.1101 162,-59.2946 162,-42.5"/>
-<polygon fill="black" stroke="black" points="172.897,-77.638 175,-82.5 176.388,-77.3876 172.897,-77.638"/>
+<g id="a_ap201_userk"><a xlink:title="token from file:keytab, server fetches from pam(?) server verifies. client_config: exe:kinit, server_config &#160;exe:console exe:ipa&#45;config(?)">
+<path fill="none" stroke="black" d="M162,-77.468C162,-63.6819 162,-58.4722 162,-42.5"/>
+<polygon fill="black" stroke="black" points="160.25,-77.5 162,-82.5 163.75,-77.5 160.25,-77.5"/>
 </a>
 </g>
 </g>
 <!-- ssh201&#45;&gt;pam201 -->
 <g id="ssh201_pam201" class="edge"><title>ssh201&#45;&gt;pam201</title>
 <g id="a_ssh201_pam201"><a xlink:title="host access">
-<path fill="none" stroke="black" d="M236.027,-124.685C227.781,-132.202 217.232,-140.068 206,-144 179.992,-153.104 169.91,-153.381 144,-144 137.163,-141.525 130.635,-137.507 124.776,-133.001"/>
-<polygon fill="black" stroke="black" points="125.822,-131.596 120.832,-129.817 123.623,-134.319 125.822,-131.596"/>
+<path fill="none" stroke="black" d="M223.027,-124.685C214.781,-132.202 204.232,-140.068 193,-144 166.992,-153.104 156.91,-153.381 131,-144 124.163,-141.525 117.635,-137.507 111.776,-133.001"/>
+<polygon fill="black" stroke="black" points="112.822,-131.596 107.832,-129.817 110.623,-134.319 112.822,-131.596"/>
 </a>
 </g>
 </g>
 <!-- ssh201&#45;&gt;userp -->
 <g id="ssh201_userp" class="edge"><title>ssh201:s&#45;&gt;userp:n</title>
 <g id="a_ssh201_userp"><a xlink:title="password from user, md5(password) from file:/etc/passwd">
-<path fill="none" stroke="black" d="M252.477,-82.5002C247.98,-62.4001 216,-66.5719 216,-42.5"/>
-<polygon fill="black" stroke="black" points="250.739,-82.7092 253,-87.5 254.22,-82.345 250.739,-82.7092"/>
+<path fill="none" stroke="black" d="M239.499,-82.1366C236.052,-64.7208 216,-63.2188 216,-42.5"/>
+<polygon fill="black" stroke="black" points="237.792,-82.6846 240,-87.5 241.277,-82.3588 237.792,-82.6846"/>
 </a>
 </g>
 </g>
@@ -360,15 +345,15 @@ body {
 <g id="a_userc"><a xlink:title="User With SSL Cert">
 <polygon fill="none" stroke="none" stroke-width="2" points="288,-41.5 252,-41.5 252,-5.5 288,-5.5 288,-41.5"/>
 <image xlink:href="user.svg" width="34px" height="36px" preserveAspectRatio="xMinYMin meet" x="253" y="-41.5"/>
-<text text-anchor="middle" x="270" y="-8.5" font-family="Helvetica,sans-Serif" font-size="10.00">usr:c</text>
+<text text-anchor="middle" x="270" y="-8.5" font-family="Helvetica,sans-Serif" font-size="10.00">ssl</text>
 </a>
 </g>
 </g>
 <!-- ssh201&#45;&gt;userc -->
 <g id="ssh201_userc" class="edge"><title>ssh201:s&#45;&gt;userc:n</title>
-<g id="a_ssh201_userc"><a xlink:title="id_rsa from file, id_rsa.pub from file. client configured from ssh&#45;keygen, server configured on ssh&#45;copy&#45;id via password">
-<path fill="none" stroke="black" d="M253.355,-82.3878C255.796,-65.5939 270,-62.0423 270,-42.5"/>
-<polygon fill="black" stroke="black" points="251.601,-82.3907 253,-87.5 255.092,-82.6333 251.601,-82.3907"/>
+<g id="a_ssh201_userc"><a xlink:title="client: file:id_rsa. server: file:id_rsa.pub. client_config: exe:ssh&#45;keygen. server_config: exe:ssh&#45;copy&#45;id via ssh201_userp">
+<path fill="none" stroke="black" d="M240.521,-82.3369C244.504,-63.7778 270,-64.6591 270,-42.5"/>
+<polygon fill="black" stroke="black" points="238.761,-82.3496 240,-87.5 242.243,-82.7009 238.761,-82.3496"/>
 </a>
 </g>
 </g>
@@ -390,6 +375,16 @@ body {
 
 </div>
 <div id="desc-wrap">
+  <div id="choices">
+    <form id="config-form">
+      <label><input type="radio" name="config" id="c_all" value="" checked="true">all</label><br>
+      <label><input type="radio" name="config" id="c_database" value="database">database</label><br>
+      <label><input type="radio" name="config" id="c_ldap" value="ldap">ldap</label><br>
+      <label><input type="radio" name="config" id="c_amazon" value="amazon">amazon</label><br>
+      <label><input type="radio" name="config" id="c_external" value="external">external (idm password)</label><br>
+      <label><input type="radio" name="config" id="c_sso" value="sso">sso (kerberos tickets)</label>
+    </form>
+  </div>
   <div id="desc">
     <p>a</p>
     <p>b</p>
@@ -410,14 +405,14 @@ function displayEdge(id) {
     return;
   if(current_node) {
     var old_ids = current_node.split('_');
-    childNodes("#"+old_ids[0]).style("stroke", "")
-    childNodes("#"+old_ids[1]).style("stroke", "")
+    d3.select("#"+ids[0]).classed('src', false)
+    d3.select("#"+ids[1]).classed('dest', false)
   }
   current_node = id;
 
   var ids = id.split('_');
-  childNodes("#"+ids[0]).style("stroke", "green")
-  childNodes("#"+ids[1]).style("stroke", "green")
+  d3.select("#"+ids[0]).classed('src', true)
+  d3.select("#"+ids[1]).classed('dest', true)
 
   var info = d3.select("#"+id+" a")
   if (info)
@@ -429,9 +424,9 @@ function displayEdge(id) {
 }
 
 d3.selectAll(".node").on('mouseover', function() {
-  childNodes(this).style("stroke", "red");
+  d3.select(this).classed('active', true)
 }).on('mouseout', function() {
-  childNodes(this).style("stroke", "");
+  d3.select(this).classed('active', false)
 });
 
 d3.selectAll(".edge").on('mouseover', function() {

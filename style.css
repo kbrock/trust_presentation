@@ -1,3 +1,33 @@
+/* layout */
+body {
+  font-family: "helvetica";
+  font-size: 14px;
+}
+#diagram, #desc-wrap {
+  xborder: 1px solid blue;
+}
+#diagram {
+  float: left;
+}
+#desc-wrap {
+  margin: 0px;
+  margin-left: 840px;
+  padding: 15px 4px 4px 4px;
+
+}
+
+#desc, #choices {
+  border: 1.75px solid #000000;
+  border-radius: 8px;
+  /* cluster background */
+  background-color: #dddddd;
+  padding: 5px;
+  margin: 8px;
+  font-weight: bold;
+}
+
+/* diagram */
+
 text {
   fill: #666666;
 }
@@ -20,6 +50,22 @@ text {
 .node text {
   font-size: 12px;
 }
+
+.src.node path,
+.src.node polygon,
+.src.node polyline,
+.dest.node path,
+.dest.node polygon,
+.dest.node polyline {
+  stroke: green;
+}
+
+.active.node path,
+.active.node polygon,
+.active.node polyline {
+  stroke: red;
+}
+
 
 /* arrow head */
 .edge polygon {
