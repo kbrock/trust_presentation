@@ -13,10 +13,10 @@ digraph Enterprise {
 
     cloud2 [ id="cloud2" label="VMWare"
              shape="custom" shapefile="cloud.svg"
-             color = "none" fillcolor="none" ]
+             color = "none" fillcolor="none" tooltip="VMWare, OpenStack, Etc" ]
     iam1   [ id="iam1" label="Amazon\nIAM"
              shape="custom" shapefile="cloud.svg"
-             color = "none" fillcolor="none" ]
+             color = "none" fillcolor="none" tooltip="Amazon Identitay Access Management" ]
 
   {
 
@@ -38,8 +38,8 @@ digraph Enterprise {
         ssh101 [ id="ssh101" label="ssh" ]
         */
         /* */
-        db101:s -> ui101:n [ id="db101_ui101" ]
-        ui101   -> ap101   [ id="ui101_ap101" ]
+        db101:s -> ui101:n [ id="db101_ui101" tooltip="host access" ]
+        ui101   -> ap101   [ id="ui101_ap101" tooltip="host access" ]
         /*
         pam101 [ id="pam101" label="{pam|sssd}" ]
         con101:s -> ssh101:n [ id="con201_ssh101" ]
@@ -59,7 +59,7 @@ digraph Enterprise {
         style = "rounded,filled";
         label = "Regional DB Appliance";
 
-        rep201 [ id="rep201" label="{db sync|worker}" ]
+        rep201 [ id="rep201" label="{db sync|worker}" tooltip="Ruby replication worker"]
         db201  [ id="db201"  label="DB2" shape="custom" shapefile="db.svg" color = "none" fillcolor="none" ]
         mem201 [ id="mem201" label="{memcache|session}" ]
         pam201 [ id="pam201" label="{pam|sssd}" ]
@@ -70,18 +70,18 @@ digraph Enterprise {
         ssh201 [ id="ssh201" label="ssh" ]
 
         /* */
-        db201:s  -> ui201:n  [ id="db201_ui201" ]
-        ui201:s  -> ap201:n  [ id="ui201_ap201" ]
-        mem201:s -> ui201:n  [ id="mem201_ui201" ]
-        con201:s -> ssh201:n [ id="con201_ssh201" ]
+        db201:s  -> ui201:n  [ id="db201_ui201"   tooltip="host access (no password in databse.yml)" ]
+        ui201:s  -> ap201:n  [ id="ui201_ap201"   tooltip="host access" ]
+        mem201:s -> ui201:n  [ id="mem201_ui201"  tooltip="host access (firewall)" ]
+        con201:s -> ssh201:n [ id="con201_ssh201" tooltip="user@host access" ]
         {
           rank="same";
-          ap201  -> pam201   [ id="ap201_pam201"  dir="forward"]
-          ssh201 -> pam201   [ id="ssh201_pam201" dir="forward"]
+          ap201  -> pam201   [ id="ap201_pam201"  dir="forward" tooltip="host access" ]
+          ssh201 -> pam201   [ id="ssh201_pam201" dir="forward" tooltip="host access" ]
         }
 
         /* */
-        rep201 -> db201  [ id="rep201_db201" dir="forward" constraint="false" ]
+        rep201 -> db201  [ id="rep201_db201" dir="forward" constraint="false" tooltip="host access (database.yml)"]
       }
 
       subgraph cluster_202 {
@@ -95,42 +95,44 @@ digraph Enterprise {
 
   /* put these together on the bottom line */
 
-  
-    user1  [ id="user1" label="User" labelloc="b" fontsize="10"
-             shape="custom" shapefile="user.svg"
-             color = "none" fillcolor="none" ]
-  
-    user2  [ id="user2" label="User" labelloc="b" fontsize="10"
-             shape="custom" shapefile="user.svg"
-             color = "none" fillcolor="none" ]
-
+  {
+    node  [ labelloc="b" fontsize="10"
+            shape="custom" shape="custom" shapefile="user.svg"
+            fixedsize="true" height="0.5" width="0.5" scale="both"
+            color = "none" fillcolor="none"
+           ]
+    usera  [ id="usera" label="Admin" tooltip="Admin with Password" ]
+    userp  [ id="userp" label="usr:p" tooltip="User with Password" ]
+    userk  [ id="userk" label="usr:k" tooltip="User With Kerberos Ticket" ]
+    userc  [ id="userc" label="usr:c" tooltip="User With SSL Cert" ]
+  }
    
   /* link 101 to 201 for region to region */ 
-    db101    -> rep201  [ id="db101_rep201" constraint="false" ]
-    ui101:w  -> ui201:e [ id="ui101_ui201"  dir="both" constraint="false"]
+    db101    -> rep201  [ id="db101_rep201" constraint="false" tooltip="password from file:vmdb.yml" ]
+    ui101:w  -> ui201:e [ id="ui101_ui201"  dir="both" constraint="false" tooltip="user/password from file:v2_key" ]
 
   /* link 201 to 202 (use external database) */
-    db201:s  -> wk202a  [ id="db201_wk202a" ]
+    db201:s  -> wk202a  [ id="db201_wk202a" tooltip="password from file:database.yml md5(password) form file:pg_shadow" ]
 
   /* users access the system */
 
-    ap101:s  -> user1:n [ id="ap101_user1"]
-    /*
-    ssh101:s -> user1:n  [ id="ssh101_user1" ]
-    */
-    ap201:s  -> user2:n [ id="ap201_user2" ]
-    ssh201:s -> user2:n [ id="ssh201_user2" ]
+    ap101:s  -> usera:n [ id="ap101_usera" tooltip="password from user, no checking, ui101:get db101:md5(password) use file:database.yml to access db101. config via console" ]
+    /* ssh101:s -> usera:n  [ id="ssh101_usera" tooltip="user/" ] */
+    ap201:s  -> userp:n [ id="ap201_userp" tooltip="password from user, no checking, ui201 gets db201:md5(password) use file:database.yml to access db201. config via console" ]
+    ap201:s -> userk:n  [ id="ap201_userk" tooltip="token from file:keytab, server fetches from pam(?) server verifies. client config via kinit, server config via console (ipconfig?)" ]
+    ssh201:s -> userp:n [ id="ssh201_userp" tooltip="password from user, md5(password) from file:/etc/passwd" ]
+    ssh201:s -> userc:n [ id="ssh201_userc" tooltip="id_rsa from file, id_rsa.pub from file. client configured from ssh-keygen, server configured on ssh-copy-id via password" ]
 
   /* we access external services */
-    ui201    -> iam1    [ id="iam1_ui201"    dir="forward" ]
-    /*wk201 -> cloud2   [ id="cloud2_wk201"  dir="forward" constraint="false" ]*/
-    wk202a   -> cloud2  [ id="cloud2_wk202a" dir="forward" ]
+    ui201    -> iam1    [ id="iam1_ui201"    dir="forward" tooltip="password from db101 config via ui101 md(password) from file:x" ]
+    /*wk201 -> cloud2   [ id="cloud2_wk201"  dir="forward" constraint="false" tooltip="" ]*/
+    wk202a   -> cloud2  [ id="cloud2_wk202a" dir="forward" tooltip="password from db101 config via ui101 md(password) from file:x" ]
 
-  { rank="same"; iam1 cloud2 user2 kdc301 ldp301 }
+  { rank="same"; iam1 cloud2 userp kdc301 ldp301 }
 
   /* access auth */
-    pam201 -> kdc301 [ id="pam201_kdc301"    dir="forward" ]
-    ui201  -> ldp301 [ id="ui201_ldp301"     dir="forward" ]
-    pam201 -> ldp301 [ id="pam201_ldp301"    dir="forward" ]
-    user2  -> kdc301 [ id="user2_kdc301"     dir="forward" constraint="false" ]
+    pam201 -> kdc301 [ id="pam201_kdc301"    dir="forward" tooltip="file:keytab config ipa-client" ]
+    ui201  -> ldp301 [ id="ui201_ldp301"     dir="forward" tooltip="password from file:vmdb.ymlconfig:ui201" ]
+    pam201 -> ldp301 [ id="pam201_ldp301"    dir="forward" tooltip="" ]
+    userk  -> kdc301 [ id="userp_kdc301"     dir="forward" constraint="false" tooltip="" ]
 }
