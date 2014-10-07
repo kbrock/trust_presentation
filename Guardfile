@@ -20,6 +20,7 @@ def create_index(dot_filename) # this may be dot or svg
   svg_filename = dot_filename.sub('dot','svg')
   index_filename = svg_filename.sub('svg','html')
 
+  title = svg_filename.sub('.svg','').gsub(/[_-]/,' ').gsub(/(^| )(.)/) { "#{$1}#{$2.upcase}" }
   body = File.read(svg_filename)
   body.gsub!(/^<\?.*\?>\n/,'')
   body.gsub!(/<!DOC[^>]*>\n/,'')
