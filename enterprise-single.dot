@@ -38,8 +38,9 @@ digraph Enterprise {
         ssh101 [ id="ssh101" label="ssh" ]
         */
         /* */
-        db101:s -> ui101:n [ id="db101_ui101" tooltip="host access" ]
-        ui101   -> ap101   [ id="ui101_ap101" tooltip="host access" ]
+
+        db101:s -> ui101:n [ id="db101_ui101" tooltip="access:localhost config:database.yml" ]
+        ui101   -> ap101   [ id="ui101_ap101" tooltip="access:localhost" ]
         /*
         pam101 [ id="pam101" label="{pam|sssd}" ]
         con101:s -> ssh101:n [ id="con201_ssh101" ]
@@ -59,10 +60,10 @@ digraph Enterprise {
         style = "rounded,filled";
         label = "Regional DB Appliance";
 
-        rep201 [ id="rep201" label="{db sync|worker}" tooltip="Ruby replication worker"]
-        db201  [ id="db201"  label="DB2" shape="custom" shapefile="db.svg" color = "none" fillcolor="none" ]
+        rep201 [ id="rep201" label="{db sync|worker}" tooltip="Ruby replication worker\nconfig:ui201"]
+        db201  [ id="db201"  label="DB2" shape="custom" shapefile="db.svg" color = "none" fillcolor="none" tooltip="Regional database | config:con201"]
         mem201 [ id="mem201" label="{memcache|session}" ]
-        pam201 [ id="pam201" label="{pam|sssd}" ]
+        pam201 [ id="pam201" label="{pam|sssd}" tooltip="config:con201"]
         ui201  [ id="ui201"  label="{UI|worker}" ]
 
         con201 [ id="con201" label="{console|rake,cli}" ]
@@ -70,18 +71,18 @@ digraph Enterprise {
         ssh201 [ id="ssh201" label="ssh" ]
 
         /* */
-        db201:s  -> ui201:n  [ id="db201_ui201"   tooltip="host access (no password in databse.yml)" ]
-        ui201:s  -> ap201:n  [ id="ui201_ap201"   tooltip="host access" ]
-        mem201:s -> ui201:n  [ id="mem201_ui201"  tooltip="host access (firewall)" ]
-        con201:s -> ssh201:n [ id="con201_ssh201" tooltip="user@host access" ]
+        db201:s  -> ui201:n  [ id="db201_ui201"   tooltip="Stores Business data, User Identity, db identity | access:localhost | client:file:database.yml | server:pg_shadow | client_config:con201 | server_config:con201" ]
+        ui201:s  -> ap201:n  [ id="ui201_ap201"   tooltip="mod_proxy connection | access:localhost" ]
+        mem201:s -> ui201:n  [ id="mem201_ui201"  tooltip="access:localhost" ]
+        con201:s -> ssh201:n [ id="con201_ssh201" tooltip="access:localhost" ]
         {
           rank="same";
-          ap201  -> pam201   [ id="ap201_pam201"  dir="forward" tooltip="host access" ]
-          ssh201 -> pam201   [ id="ssh201_pam201" dir="forward" tooltip="host access" ]
+          ap201  -> pam201   [ id="ap201_pam201"  dir="forward" tooltip="access:localhost" ]
+          ssh201 -> pam201   [ id="ssh201_pam201" dir="forward" tooltip="access:localhost" ]
         }
 
         /* */
-        rep201 -> db201  [ id="rep201_db201" dir="forward" constraint="false" tooltip="host access (database.yml)"]
+        rep201 -> db201  [ id="rep201_db201" dir="forward" constraint="false" tooltip="access:localhost client:file:database.yml server:file:pg_shadow client_config:con201"]
       }
 
       subgraph cluster_202 {
