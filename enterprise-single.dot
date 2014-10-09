@@ -30,24 +30,24 @@ digraph Enterprise {
         style = "rounded,filled";
         label = "Master Appliance";
 
-        db101  [ id="db101"  label="DB1" shape="custom" shapefile="db.svg"  color = "none" fillcolor="none" ]
+        db101  [ id="db101"  label="DB1" shape="custom" shapefile="db.svg"  color = "none" fillcolor="none" tooltip="Reporting database" ] /* | config:con101"] */
         ui101  [ id="ui101"  label="{UI|worker}" ]
-        ap101  [ id="ap101"  label="{apache|auth...}" ]
+        ap101  [ id="ap101"  label="{apache|auth...}" tooltip="proxy"] /* NOTE: proxy for db/auth*/
         /*
         con101 [ id="con101" label="console" ]
         ssh101 [ id="ssh101" label="ssh" ]
         */
         /* */
 
-        db101:s -> ui101:n [ id="db101_ui101" tooltip="access:localhost config:database.yml" ]
+        db101:s -> ui101:n [ id="db101_ui101" tooltip="access:localhost | config:database.yml" ]
         ui101   -> ap101   [ id="ui101_ap101" tooltip="access:localhost" ]
         /*
-        pam101 [ id="pam101" label="{pam|sssd}" ]
+        pam101 [ id="pam101" label="{pam|sssd}" tooltip="Security Services | config:con101" ]
         con101:s -> ssh101:n [ id="con201_ssh101" ]
         {
           rank="same";
-          ap101 -> pam101    [ id="ap201_pam201" constraint="true" penwidth="1" dir="forward"]
-          ssh101 -> pam101   [ id="ssh201_pam201" constraint="true" penwidth="1" dir="forward"]
+          ap101 -> pam101    [ id="ap201_pam201" constraint="true" penwidth="1" dir="forward" tooltip="access:localhost"]
+          ssh101 -> pam101   [ id="ssh201_pam201" constraint="true" penwidth="1" dir="forward" tooltip="access:localhost"]
         }
 
         { rank="same"; ap101 ssh101 }
@@ -60,10 +60,10 @@ digraph Enterprise {
         style = "rounded,filled";
         label = "Regional DB Appliance";
 
-        rep201 [ id="rep201" label="{db sync|worker}" tooltip="Ruby replication worker\nconfig:ui201"]
+        rep201 [ id="rep201" label="{db sync|worker}" tooltip="Ruby replication worker | config:ui201"]
         db201  [ id="db201"  label="DB2" shape="custom" shapefile="db.svg" color = "none" fillcolor="none" tooltip="Regional database | config:con201"]
         mem201 [ id="mem201" label="{memcache|session}" ]
-        pam201 [ id="pam201" label="{pam|sssd}" tooltip="config:con201"]
+        pam201 [ id="pam201" label="{pam|sssd}" tooltip="Security Services | config:con201"]
         ui201  [ id="ui201"  label="{UI|worker}" ]
 
         con201 [ id="con201" label="{console|rake,cli}" ]
@@ -71,7 +71,7 @@ digraph Enterprise {
         ssh201 [ id="ssh201" label="ssh" ]
 
         /* */
-        db201:s  -> ui201:n  [ id="db201_ui201"   tooltip="Stores Business data, User Identity, db identity | access:localhost | client:file:database.yml | server:pg_shadow | client_config:con201 | server_config:con201" ]
+        db201:s  -> ui201:n  [ id="db201_ui201"   tooltip="Stores Business data, User Identity, db identity | access:localhost | client:file:database.yml | server:file:pg_shadow | client_config:con201 | server_config:con201" ]
         ui201:s  -> ap201:n  [ id="ui201_ap201"   tooltip="mod_proxy connection | access:localhost" ]
         mem201:s -> ui201:n  [ id="mem201_ui201"  tooltip="access:localhost" ]
         con201:s -> ssh201:n [ id="con201_ssh201" tooltip="access:localhost" ]
@@ -82,7 +82,7 @@ digraph Enterprise {
         }
 
         /* */
-        rep201 -> db201  [ id="rep201_db201" dir="forward" constraint="false" tooltip="access:localhost client:file:database.yml server:file:pg_shadow client_config:con201"]
+        rep201 -> db201  [ id="rep201_db201" dir="forward" constraint="false" tooltip="access:localhost client:file:database.yml server:db201:pg_shadow client_config:con201"]
       }
 
       subgraph cluster_202 {
