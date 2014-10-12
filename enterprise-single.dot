@@ -82,7 +82,7 @@ digraph Enterprise {
         }
 
         /* */
-        rep201 -> db201  [ id="rep201_db201" dir="forward" constraint="false" tooltip="access:localhost client:file:database.yml server:db201:pg_shadow client_config:con201"]
+        rep201 -> db201  [ id="rep201_db201" dir="forward" constraint="false" tooltip="Replication to local database | access:localhost | client:file:database.yml | server:db201:pg_shadow | client_config:con201"]
       }
 
       subgraph cluster_202 {
@@ -109,31 +109,31 @@ digraph Enterprise {
   }
    
   /* link 101 to 201 for region to region */ 
-    db101    -> rep201  [ id="db101_rep201" constraint="false" tooltip="client(rep201): file:vmdb.yml:v2_key. server(db101): file:pg_shadow:md5(password). configure(rep201): ui201. configure(db101): exe:console" ]
-    ui101:w  -> ui201:e [ id="ui101_ui201"  dir="both" constraint="false" tooltip="client(ui201): file:v2_key:password, server(ui101): file:v2_key:password" ]
+    db101    -> rep201  [ id="db101_rep201" constraint="false" tooltip="client:file:vmdb.yml | client:file:v2_key | server:db201:pg_shadow | client_configure:ui201 | server_configure:con101" ]
+    ui101:w  -> ui201:e [ id="ui101_ui201"  dir="both" constraint="false" tooltip="access:password | client:file:v2_key | server:file:v2_key" ]
 
   /* link 201 to 202 (use external database) */
-    db201:s  -> wk202a  [ id="db201_wk202a" tooltip="client(wk202a): file:database.yml:password. server(db201): file:pg_shadow:md5(password). client_config: exe:console" ]
+    db201:s  -> wk202a  [ id="db201_wk202a" tooltip="client:file:database.yml | server:db201:pg_shadow | client_config:con201" ]
 
   /* users access the system */
 
-    ap101:s  -> usera:n [ id="ap101_usera" tooltip="password from user, no checking, ui101:get db101:md5(password) use file:database.yml to access db101. config via console" ]
+    ap101:s  -> usera:n [ id="ap101_usera" tooltip="password from user, passthrough | client:usera:password | server:db101:users | server_config:con101" ]
     /* ssh101:s -> usera:n  [ id="ssh101_usera" tooltip="user/" ] */
-    ap201:s  -> userp:n [ id="ap201_userp" tooltip="client: user:password, server(ap201): proxy, server(ui201): db201_wk202a:md5(password)" ]
-    ap201:s -> userk:n  [ id="ap201_userk" tooltip="token from file:keytab, server fetches from pam(?) server verifies. client_config: exe:kinit, server_config  exe:console exe:ipa-config(?)" ]
-    ssh201:s -> userp:n [ id="ssh201_userp" tooltip="password from user, md5(password) from file:/etc/passwd" ]
-    ssh201:s -> userc:n [ id="ssh201_userc" tooltip="client: file:id_rsa. server: file:id_rsa.pub. client_config: exe:ssh-keygen. server_config: exe:ssh-copy-id via ssh201_userp" ]
+    ap201:s  -> userp:n [ id="ap201_userp" tooltip="password from user, passthrough rails logs| client:userp:password | server:db101:users" ]
+    ap201:s -> userk:n  [ id="ap201_userk" tooltip="server config uses ipa-config | client:file:keytab | server:pam201 | client_config:kinit | server_config:con201" ]
+    ssh201:s -> userp:n [ id="ssh201_userp" tooltip="password from user | client:userp:password | server:file:/etc/passwd"]
+    ssh201:s -> userc:n [ id="ssh201_userc" tooltip="client:file:id_rsa | server:file:id_rsa.pub | client_config:exe:ssh-keygen | server_config:exe:ssh-copy-id" ]
 
   /* we access external services */
     ui201    -> iam1    [ id="iam1_ui201"    dir="forward" tooltip="password from db101 config via ui101 md(password) from file:x" ]
     /*wk201 -> cloud2   [ id="cloud2_wk201"  dir="forward" constraint="false" tooltip="" ]*/
-    wk202a   -> cloud2  [ id="cloud2_wk202a" dir="forward" tooltip="password from db101 config via ui101 md(password) from file:x" ]
+    wk202a   -> cloud2  [ id="cloud2_wk202a" dir="forward" tooltip="password stored in database and decoded with v2_key | client:db101:authentications | client:file:v2_key | server:cloud2:password" ]
 
   { rank="same"; iam1 cloud2 userp kdc301 ldp301 }
 
   /* access auth */
     ap201 -> kdc301 [ id="ap201_kdc301"    dir="forward" tooltip="file:keytab config ipa-client" ]
-    ui201  -> ldp301 [ id="ui201_ldp301"     dir="forward" tooltip="password from file:vmdb.ymlconfig:ui201" ]
+    ui201  -> ldp301 [ id="ui201_ldp301"     dir="forward" tooltip="client:file:vmdb.yml | client:file:v2_key" ]
     pam201 -> ldp301 [ id="pam201_ldp301"    dir="forward" tooltip="password from " ]
     userk  -> kdc301 [ id="userp_kdc301"     dir="forward" constraint="false" tooltip="" ]
 }

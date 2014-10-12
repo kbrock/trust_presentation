@@ -29,6 +29,7 @@
 /* instead of relying upon mouseover/mouseout, having mouseover sticky */
 
 var current_node = null;
+var old_nodes=[];
 
 /* used for hilighting */
 function childNodes(parent) {
@@ -37,24 +38,27 @@ function childNodes(parent) {
 function displayEdge(id) {
   if(id == current_node)
     return;
-  if(current_node) {
-    var old_ids = current_node.split('_');
-    d3.select("#"+old_ids[0]).classed('src', false)
-    d3.select("#"+old_ids[1]).classed('dest', false)
+  while(node = old_nodes.pop()) {
+    d3.select(node[0]).classed(node[1], false);
   }
   current_node = id;
 
   var ids = id.split('_');
   d3.select("#"+ids[0]).classed('src', true)
   d3.select("#"+ids[1]).classed('dest', true)
+  old_nodes.push(["#"+ids[0], 'src']);
+  old_nodes.push(["#"+ids[1], 'dest']);
 
   var info = d3.select("#"+id+" a")
-  if (info)
-    info = (info.attr("xlink:title") || "") + "<br>";
-  else
-    info = "";
-  console.debug(id, ids, info)
-  d3.select("#desc").html(info+"<br />"+ids[0] +" to "+ids[1]);
+  if (info) {
+    info = (info.attr("xlink:title")
+    console.debug(id, ids, info)
+  }
+  if (info) {
+    part = info.split("|")
+    //
+  }
+  d3.select("#desc").html((info||"")+"<br />"+ids[0] +" to "+ids[1]);
 }
 
 d3.selectAll(".node").on('mouseover', function() {
