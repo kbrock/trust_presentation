@@ -6,6 +6,7 @@
 <body>
   <!--
     TODO: want to embed these into this - but height/width getting botched
+          embedding will allow better use of css in the attributes
   -->
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="display:none">
   <defs>
@@ -32,33 +33,50 @@ var current_node = null;
 var old_nodes=[];
 
 /* used for hilighting */
-function childNodes(parent) {
-  return d3.select(parent).selectAll("path,polygon,polyline");
+function markClass(id, className) {
+  if (id && className) {
+    d3.select("#"+id).classed(className, true)
+    old_nodes.push(["#"+id, className]);
+  }
 }
-function displayEdge(id) {
-  if(id == current_node)
-    return;
+
+function cleanupEdge(id) {
+  // cleanup last highlight
   while(node = old_nodes.pop()) {
     d3.select(node[0]).classed(node[1], false);
   }
-  current_node = id;
+}
 
+function displayEdge(id) {
+  markClass(id, 'src-dest');
+  // these are going away - infoText should provide everything
   var ids = id.split('_');
-  d3.select("#"+ids[0]).classed('src', true)
-  d3.select("#"+ids[1]).classed('dest', true)
-  old_nodes.push(["#"+ids[0], 'src']);
-  old_nodes.push(["#"+ids[1], 'dest']);
+  markClass(ids[0], 'src');
+  markClass(ids[1], 'dest');
 
   var info = d3.select("#"+id+" a")
   if (info) {
-    info = (info.attr("xlink:title")
-    console.debug(id, ids, info)
+    info = info.attr("xlink:title");
+    console.debug(id, "info", info);
   }
+  // just display everything for now (in future, only attr that have no ':')
+  var infoText = (info || "");
+
   if (info) {
-    part = info.split("|")
-    //
+    var attrs = info.split("|")
+    for(var attr_num = 0; attr_num < attrs.length ; attr_num++) {
+      var attr = attrs[attr_num].trim();
+      attr_parts = attr.split(":")
+      markClass(attr_parts[1], attr_parts[0]);
+    }
   }
-  d3.select("#desc").html((info||"")+"<br />"+ids[0] +" to "+ids[1]);
+  //console.debug(id, "infoText", infoText);
+  d3.select("#desc").html(infoText);
+
+  // debug only
+  for(var i=0; i< old_nodes.length ; i++) {
+    console.debug(id, old_nodes[i])
+  }
 }
 
 d3.selectAll(".node").on('mouseover', function() {
@@ -67,9 +85,13 @@ d3.selectAll(".node").on('mouseover', function() {
   d3.select(this).classed('active', false)
 });
 
+/* since it is hard to highlight, doing mouseout/mouseover when mouseover a new edge */
 d3.selectAll(".edge").on('mouseover', function() {
-  console.debug('over edge', this.id, this);
-  displayEdge(this.id);
+  if (this.id != current_node) {
+    cleanupEdge(current_node);
+    current_node = this.id;
+    displayEdge(this.id);
+  }
 }); 
 </script>
 </body>
