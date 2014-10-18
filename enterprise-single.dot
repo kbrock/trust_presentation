@@ -135,5 +135,5 @@ digraph Enterprise {
     ap201 -> kdc301 [ id="ap201_kdc301"    dir="forward" tooltip="client:ap201:keytab | client-config:con201:ipa-config" ]
     ui201  -> ldp301 [ id="ui201_ldp301"     dir="forward" tooltip="ruby ldap code | client:ui201:vmdb.yml | client:ui201:v2_key | client-config:ui201" ]
     pam201 -> ldp301 [ id="pam201_ldp301"    dir="forward" tooltip="password from " ]
-    userk  -> kdc301 [ id="userp_kdc301"     dir="forward" constraint="false" tooltip="" ]
+    userk  -> kdc301 [ id="userp_kdc301"     dir="forward" constraint="false" tooltip="ticket from kerberos | client:userp:password | client-config:userp:kinit" ]
 }

@@ -47,36 +47,18 @@ function cleanupEdge(id) {
   }
 }
 
-function displayEdge(id) {
-  markClass(id, 'src-dest');
-  // these are going away - infoText should provide everything
-  var ids = id.split('_');
-  markClass(ids[0], 'src');
-  markClass(ids[1], 'dest');
-
-  var info = d3.select("#"+id+" a")
-  if (info) {
-    info = info.attr("xlink:title");
-    console.debug(id, "info", info);
-  }
-  // just display everything for now (in future, only attr that have no ':')
-  var infoText = (info || "");
-
-  if (info) {
-    var attrs = info.split("|")
-    for(var attr_num = 0; attr_num < attrs.length ; attr_num++) {
-      var attr = attrs[attr_num].trim();
-      attr_parts = attr.split(":")
-      markClass(attr_parts[1], attr_parts[0]);
+function displayEdge(datum) {
+  markClass(datum.id, 'src-dest');
+  markClass(datum.client, 'src');
+  markClass(datum.server, 'dest');
+  var id = datum.id;
+  for(var n in datum) {
+    if(n != "desc" && n != "id") {
+      console.debug("["+n+"]", datum[n]);
+      markClass(datum[n], n)
     }
   }
-  //console.debug(id, "infoText", infoText);
-  d3.select("#desc").html(infoText);
-
-  // debug only
-  for(var i=0; i< old_nodes.length ; i++) {
-    console.debug(id, old_nodes[i])
-  }
+  d3.select("#desc").html(datum.desc || "");
 }
 
 d3.selectAll(".node").on('mouseover', function() {
@@ -85,12 +67,45 @@ d3.selectAll(".node").on('mouseover', function() {
   d3.select(this).classed('active', false)
 });
 
-/* since it is hard to highlight, doing mouseout/mouseover when mouseover a new edge */
-d3.selectAll(".edge").on('mouseover', function() {
+d3.selectAll(".edge").datum(function(){
+  // temporary
+  var ids = this.id.split('_');
+  var datum = {
+    "id": this.id,
+    "client": ids[0],
+    "server": ids[1]
+  };
+  // all attributes should come from:
+  var info = d3.select(this).select("a")
+  if (info)
+    info = info.attr("xlink:title");
+  if (info) {
+    var attrs = info.split("|")
+    // class:id:filename - class = (config|client|server|client_config|server_config)
+    for(var attr_num = 0; attr_num < attrs.length ; attr_num++) {
+      var attr = attrs[attr_num].trim();
+      attr_parts = attr.split(":")
+      if (attr_parts[1]) {
+        // TODO: handle multiple clients?
+        datum[attr_parts[0]] = attr_parts[1];
+        // TODO: add specific support for 3rd parameter (tablename/filename)
+        // if (attr_parts[2])
+        //   attr["filename"] = attr_parts[2];
+      } else {
+        datum["desc"] = attr_parts[0];
+      }
+    }
+  }
+  return datum;
+})
+.on('mouseover', function(datum) {
+/*  it is hard to select a line using mouseover/mouseout
+ *  instead just changing selection on mouseover
+ */
   if (this.id != current_node) {
     cleanupEdge(current_node);
     current_node = this.id;
-    displayEdge(this.id);
+    displayEdge(datum);
   }
 }); 
 </script>
