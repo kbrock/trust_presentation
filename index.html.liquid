@@ -21,8 +21,6 @@
 </div>
 <div id="desc-wrap">
   <div id="desc">
-    <p>a</p>
-    <p>b</p>
   </div>
 </div>
 <script>
@@ -49,8 +47,8 @@ function cleanupEdge(id) {
 
 function displayEdge(datum) {
   markClass(datum.id, 'src-dest');
-  markClass(datum.client, 'src');
-  markClass(datum.server, 'dest');
+  //markClass(datum.client, 'src');
+  //markClass(datum.server, 'dest');
   var id = datum.id;
   for(var n in datum) {
     if(n != "desc" && n != "id") {
@@ -61,24 +59,20 @@ function displayEdge(datum) {
   d3.select("#desc").html(datum.desc || "");
 }
 
-d3.selectAll(".node").on('mouseover', function() {
-  d3.select(this).classed('active', true)
-}).on('mouseout', function() {
-  d3.select(this).classed('active', false)
-});
+function extractDatum(node, datum) {
+  // legacy
+  var ids = node["id"].split('_');
+  if(ids[1]) {
+    datum["client"] = ids[0];
+    datum["server"] = ids[1];
+  }
 
-d3.selectAll(".edge").datum(function(){
-  // temporary
-  var ids = this.id.split('_');
-  var datum = {
-    "id": this.id,
-    "client": ids[0],
-    "server": ids[1]
-  };
-  // all attributes should come from:
-  var info = d3.select(this).select("a")
-  if (info)
+  var info = d3.select(node).select("a")
+  if (info && info[0] && info[0][0]) {
     info = info.attr("xlink:title");
+  } else {
+    info = null;
+  }
   if (info) {
     var attrs = info.split("|")
     // class:id:filename - class = (config|client|server|client_config|server_config)
@@ -86,7 +80,7 @@ d3.selectAll(".edge").datum(function(){
       var attr = attrs[attr_num].trim();
       attr_parts = attr.split(":")
       if (attr_parts[1]) {
-        // TODO: handle multiple clients?
+        // TODO: handle duplicate attributes?
         datum[attr_parts[0]] = attr_parts[1];
         // TODO: add specific support for 3rd parameter (tablename/filename)
         // if (attr_parts[2])
@@ -96,6 +90,25 @@ d3.selectAll(".edge").datum(function(){
       }
     }
   }
+  return datum;
+}
+
+d3.selectAll(".node").on('mouseover', function() {
+  d3.select(this).classed('active', true)
+}).on('mouseout', function() {
+  d3.select(this).classed('active', false)
+});
+d3.selectAll(".node").datum(function() {
+  var datum = extractDatum(this, {"id" : this.id});
+  if (datum["class"]) {
+    d3.select(this).classed(datum["class"], true);
+    delete datum["class"];
+  }
+
+  return datum;
+});
+d3.selectAll(".edge").datum(function(){
+  var datum = extractDatum(this, {"id" : this.id});
   return datum;
 })
 .on('mouseover', function(datum) {
