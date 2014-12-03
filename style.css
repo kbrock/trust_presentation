@@ -31,6 +31,19 @@ body {
 text {
   fill: #666666;
 }
+
+.node.noui path {
+  fill: #dddddd;
+}
+
+.node.same path {
+  stroke: red;
+}
+
+.node.same  text {
+  fill: red;
+}
+
 /* machine title */
 .cluster  text {
   fill: #000000;
@@ -68,16 +81,17 @@ text {
   fill: #cccc00;
 }
 
-
-.edge.src-dest polygon {
+/*
+.edge.src polygon, .edge.dest polygon {
   stroke: #996600;
   fill: #996600;
   z-index: 1;
 }
-.edge.src-dest path {
+.edge.src path, .edge.dest path {
   stroke: #996600;
   z-index: 1;
 }
+*/
 
 .active.node text {
   fill: #000000;

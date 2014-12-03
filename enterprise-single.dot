@@ -39,15 +39,15 @@ digraph Enterprise {
         */
         /* */
 
-        db101:s -> ui101:n [ id="db101_ui101" tooltip="access via localhost | config:ui101:database.yml" ]
-        ui101   -> ap101   [ id="ui101_ap101" tooltip="access via localhost | client:ap101 | server:ui101" ]
+        db101:s -> ui101:n [ tooltip="access via localhost | client:ui101 | server:db101 | config:ui101:database.yml" ]
+        ui101   -> ap101   [ tooltip="access via localhost | client:ap101 | server:ui101" ]
         /*
         pam101 [ id="pam101" label="{pam|sssd}" tooltip="Security Services | config:con101" ]
-        con101:s -> ssh101:n [ id="con201_ssh101" ]
+        con101:s -> ssh101:n [  ]
         {
           rank="same";
-          ap101 -> pam101    [ id="ap201_pam201" constraint="true" penwidth="1" dir="forward" tooltip="access:localhost"]
-          ssh101 -> pam101   [ id="ssh201_pam201" constraint="true" penwidth="1" dir="forward" tooltip="access:localhost"]
+          ap101 -> pam101    [ constraint="true" penwidth="1" dir="forward" tooltip="access:localhost"]
+          ssh101 -> pam101   [ constraint="true" penwidth="1" dir="forward" tooltip="access:localhost"]
         }
 
         { rank="same"; ap101 ssh101 }
@@ -71,18 +71,18 @@ digraph Enterprise {
         ssh201 [ id="ssh201" label="ssh" ]
 
         /* */
-        db201:s  -> ui201:n  [ id="db201_ui201"   tooltip="Stores Business data, User Identity, db identity | access:localhost | client:ui201:database.yml | server:db201:pg_shadow | client-config:con201 | server-config:con201" ]
-        ui201:s  -> ap201:n  [ id="ui201_ap201"   tooltip="mod_proxy connection | access:localhost" ]
-        mem201:s -> ui201:n  [ id="mem201_ui201"  tooltip="access:localhost" ]
-        con201:s -> ssh201:n [ id="con201_ssh201" tooltip="access:localhost" ]
+        db201:s  -> ui201:n  [ tooltip="Stores Business data, User Identity, db identity | access:localhost | client:ui201:database.yml | server:db201:pg_shadow | client-config:con201 | server-config:con201" ]
+        ui201:s  -> ap201:n  [ tooltip="mod_proxy connection | access:localhost | client:ap201 | server:ui201" ]
+        mem201:s -> ui201:n  [ tooltip="access:localhost | client:ui201 | server:mem201" ]
+        con201:s -> ssh201:n [ tooltip="access:localhost | client:ssh201 | server:con201" ]
         {
           rank="same";
-          ap201  -> pam201   [ id="ap201_pam201"  dir="forward" tooltip="access:localhost" ]
-          ssh201 -> pam201   [ id="ssh201_pam201" dir="forward" tooltip="access:localhost" ]
+          ap201  -> pam201   [ dir="forward" tooltip="access:localhost client:pam201 server:ap201" ]
+          ssh201 -> pam201   [ dir="forward" tooltip="access:localhost client:pam201 server:ssh201" ]
         }
 
         /* */
-        rep201 -> db201  [ id="rep201_db201" dir="forward" constraint="false" tooltip="Replication to local database | access:localhost | client:rep201:database.yml | server:db201:pg_shadow | client-config:con201"]
+        rep201 -> db201  [ dir="forward" constraint="false" tooltip="Replication to local database | access:localhost | client:rep201:database.yml | server:db201:pg_shadow | client-config:con201"]
       }
 
       subgraph cluster_202 {
@@ -109,31 +109,31 @@ digraph Enterprise {
   }
    
   /* link 101 to 201 for region to region */ 
-    db101    -> rep201  [ id="db101_rep201" constraint="false" tooltip="password from vmdb.yml access | client:rep201:vmdb.yml | client:rep201:v2_key | server:db201:pg_shadow | client-config:ui201 | server-config:con101" ]
-    ui101:w  -> ui201:e [ id="ui101_ui201"  dir="both" constraint="false" tooltip="password access | client:file:v2_key | server:file:v2_key" ]
+    db101    -> rep201  [ constraint="false" tooltip="password from vmdb.yml access | client:rep201:vmdb.yml | client:rep201:v2_key | server:db201:pg_shadow | client-config:ui201 | server-config:con101" ]
+    ui101:w  -> ui201:e [ dir="both" constraint="false" tooltip="password access | client:file:v2_key | server:file:v2_key" ]
 
   /* link 201 to 202 (use external database) */
-    db201:s  -> wk202a  [ id="db201_wk202a" tooltip="client:wk202a:database.yml | server:db201:pg_shadow | client-config:con201" ]
+    db201:s  -> wk202a  [ tooltip="client:wk202a:database.yml | server:db201:pg_shadow | client-config:con201" ]
 
   /* users access the system */
 
-    ap101:s  -> usera:n [ id="ap101_usera" tooltip="password from user, passthrough | client:usera:password | server:db101:users | server-config:con101" ]
-    /* ssh101:s -> usera:n  [ id="ssh101_usera" tooltip="user/" ] */
-    ap201:s  -> userp:n [ id="ap201_userp" tooltip="password from user, passthrough rails logs | client:userp:password | server:db101:users" ]
-    ap201:s -> userk:n  [ id="ap201_userk" tooltip="server config uses ipa-config | client:file:keytab | server:pam201 | client-config:kdc301:kinit | server-config:con201" ]
-    ssh201:s -> userp:n [ id="ssh201_userp" tooltip="password from user | client:userp:password | server:ssh201:/etc/passwd"]
-    ssh201:s -> userc:n [ id="ssh201_userc" tooltip="client:userc:id_rsa | server:ssh201:id_rsa.pub | client-config:userc:ssh-keygen | server-config:userc:ssh-copy-id" ]
+    ap101:s  -> usera:n [ tooltip="password from user, passthrough | client:usera:password | server:db101:users | server-config:con101" ]
+    /* ssh101:s -> usera:n  [ tooltip="user/" ] */
+    ap201:s  -> userp:n [ tooltip="password from user, passthrough rails logs | client:userp:password | server:db201:users" ]
+    ap201:s -> userk:n  [ tooltip="server config uses ipa-config | client:file:keytab | server:pam201 | client-config:kdc301:kinit | server-config:con201" ]
+    ssh201:s -> userp:n [ tooltip="password from user | client:userp:password | server:ssh201:/etc/passwd"]
+    ssh201:s -> userc:n [ tooltip="client:userc:id_rsa | server:ssh201:id_rsa.pub | client-config:userc:ssh-keygen | server-config:userc:ssh-copy-id" ]
 
   /* we access external services */
-    ui201    -> iam1    [ id="iam1_ui201"    dir="forward" tooltip="password from db101 | client:db201:authentications | client-config:ui201 | server:iam1" ]
-    /*wk201 -> cloud2   [ id="cloud2_wk201"  dir="forward" constraint="false" tooltip="" ]*/
-    wk202a   -> cloud2  [ id="cloud2_wk202a" dir="forward" tooltip="password stored in database and decoded with v2_key | client:db101:authentications | client:wk202a:v2_key | server:cloud2:password" ]
+    ui201    -> iam1    [ dir="forward" tooltip="password from db101 | client:db201:authentications | client-config:ui201 | server:iam1" ]
+    /*wk201 -> cloud2   [ dir="forward" constraint="false" tooltip="" ]*/
+    wk202a   -> cloud2  [ dir="forward" tooltip="password stored in database and decoded with v2_key | client:db101:authentications | client:wk202a:v2_key | server:cloud2:password" ]
 
   { rank="same"; iam1 cloud2 userp kdc301 ldp301 }
 
   /* access auth */
-    ap201 -> kdc301 [ id="ap201_kdc301"    dir="forward" tooltip="client:ap201:keytab | client-config:con201:ipa-config" ]
-    ui201  -> ldp301 [ id="ui201_ldp301"     dir="forward" tooltip="ruby ldap code | client:ui201:vmdb.yml | client:ui201:v2_key | client-config:ui201" ]
-    pam201 -> ldp301 [ id="pam201_ldp301"    dir="forward" tooltip="password from " ]
-    userk  -> kdc301 [ id="userp_kdc301"     dir="forward" constraint="false" tooltip="ticket from kerberos | client:userp:password | client-config:userp:kinit" ]
+    ap201 -> kdc301  [ dir="forward" tooltip="client:ap201:keytab | client-config:con201:ipa-config | server:kdc201" ]
+    ui201  -> ldp301 [ dir="forward" tooltip="ruby ldap code | client:ui201:vmdb.yml | client:ui201:v2_key | client-config:ui201 | server:ldp301" ]
+    pam201 -> ldp301 [ dir="forward" tooltip="password | client:pam201 | server:ldp301 " ]
+    userk  -> kdc301 [ dir="forward" constraint="false" tooltip="ticket from kerberos | client:userp:password | client-config:userp:kinit" ]
 }

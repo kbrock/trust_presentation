@@ -87,8 +87,8 @@
 <text text-anchor="middle" x="549" y="-174.3" font-family="Helvetica,sans-Serif" font-size="14.00">worker</text>
 </g>
 <!-- db101&#45;&gt;ui101 -->
-<g id="db101_ui101" class="edge"><title>db101:s&#45;&gt;ui101:n</title>
-<g id="a_db101_ui101"><a xlink:title="access via localhost | config:ui101:database.yml">
+<g id="edge1" class="edge"><title>db101:s&#45;&gt;ui101:n</title>
+<g id="a_edge1"><a xlink:title="access via localhost | client:ui101 | server:db101 | config:ui101:database.yml">
 <path fill="none" stroke="black" d="M549,-246.812C549,-233.8 549,-228.74 549,-213.5"/>
 <polygon fill="black" stroke="black" points="547.25,-247 549,-252 550.75,-247 547.25,-247"/>
 </a>
@@ -105,8 +105,8 @@
 </g>
 </g>
 <!-- db101&#45;&gt;rep201 -->
-<g id="db101_rep201" class="edge"><title>db101&#45;&gt;rep201</title>
-<g id="a_db101_rep201"><a xlink:title="password from vmdb.yml access | client:rep201:vmdb.yml | client:rep201:v2_key | server:db201:pg_shadow | client&#45;config:ui201 | server&#45;config:con101">
+<g id="edge10" class="edge"><title>db101&#45;&gt;rep201</title>
+<g id="a_edge10"><a xlink:title="password from vmdb.yml access | client:rep201:vmdb.yml | client:rep201:v2_key | server:db201:pg_shadow | client&#45;config:ui201 | server&#45;config:con101">
 <path fill="none" stroke="black" d="M512.225,-283C444.325,-283 376.425,-283 308.525,-283"/>
 <polygon fill="black" stroke="black" points="512.532,-284.75 517.532,-283 512.532,-281.25 512.532,-284.75"/>
 </a>
@@ -123,8 +123,8 @@
 </g>
 </g>
 <!-- ui101&#45;&gt;ap101 -->
-<g id="ui101_ap101" class="edge"><title>ui101&#45;&gt;ap101</title>
-<g id="a_ui101_ap101"><a xlink:title="access via localhost | client:ap101 | server:ui101">
+<g id="edge2" class="edge"><title>ui101&#45;&gt;ap101</title>
+<g id="a_edge2"><a xlink:title="access via localhost | client:ap101 | server:ui101">
 <path fill="none" stroke="black" d="M549,-161.129C549,-150.864 549,-139.336 549,-129.607"/>
 <polygon fill="black" stroke="black" points="547.25,-161.366 549,-166.366 550.75,-161.366 547.25,-161.366"/>
 </a>
@@ -138,8 +138,8 @@
 <text text-anchor="middle" x="161" y="-174.3" font-family="Helvetica,sans-Serif" font-size="14.00">worker</text>
 </g>
 <!-- ui101&#45;&gt;ui201 -->
-<g id="ui101_ui201" class="edge"><title>ui101:w&#45;&gt;ui201:e</title>
-<g id="a_ui101_ui201"><a xlink:title="password access | client:file:v2_key | server:file:v2_key">
+<g id="edge11" class="edge"><title>ui101:w&#45;&gt;ui201:e</title>
+<g id="a_edge11"><a xlink:title="password access | client:file:v2_key | server:file:v2_key">
 <path fill="none" stroke="black" d="M513.519,-191.758C503.509,-201.849 495.679,-242.551 470,-248 455.762,-251.022 222.238,-251.022 208,-248 203.718,-247.091 201.615,-247.511 199,-244 192.846,-235.737 200.786,-202.619 196.083,-192.471"/>
 <polygon fill="black" stroke="black" points="514.322,-193.313 518,-189.5 512.747,-190.187 514.322,-193.313"/>
 <polygon fill="black" stroke="black" points="197.073,-191.026 192,-189.5 195.014,-193.857 197.073,-191.026"/>
@@ -150,14 +150,14 @@
 <g id="usera" class="node"><title>usera</title>
 <g id="a_usera"><a xlink:title="Admin with Password">
 <polygon fill="none" stroke="none" stroke-width="2" points="567,-41.5 531,-41.5 531,-5.5 567,-5.5 567,-41.5"/>
-<image xlink:href="user.svg" width="34px" height="36px" preserveAspectRatio="xMinYMin meet" x="532" y="-41.5"/>
+<image xlink:href="user.svg" width="36px" height="36px" preserveAspectRatio="xMinYMin meet" x="531" y="-41.5"/>
 <text text-anchor="middle" x="549" y="-8.5" font-family="Helvetica,sans-Serif" font-size="10.00">Admin</text>
 </a>
 </g>
 </g>
 <!-- ap101&#45;&gt;usera -->
-<g id="ap101_usera" class="edge"><title>ap101:s&#45;&gt;usera:n</title>
-<g id="a_ap101_usera"><a xlink:title="password from user, passthrough | client:usera:password | server:db101:users | server&#45;config:con101">
+<g id="edge13" class="edge"><title>ap101:s&#45;&gt;usera:n</title>
+<g id="a_edge13"><a xlink:title="password from user, passthrough | client:usera:password | server:db101:users | server&#45;config:con101">
 <path fill="none" stroke="black" d="M549,-77.468C549,-63.6819 549,-58.4722 549,-42.5"/>
 <polygon fill="black" stroke="black" points="547.25,-77.5 549,-82.5 550.75,-77.5 547.25,-77.5"/>
 </a>
@@ -173,16 +173,16 @@
 </g>
 </g>
 <!-- rep201&#45;&gt;db201 -->
-<g id="rep201_db201" class="edge"><title>rep201&#45;&gt;db201</title>
-<g id="a_rep201_db201"><a xlink:title="Replication to local database | access:localhost | client:rep201:database.yml | server:db201:pg_shadow | client&#45;config:con201">
+<g id="edge9" class="edge"><title>rep201&#45;&gt;db201</title>
+<g id="a_edge9"><a xlink:title="Replication to local database | access:localhost | client:rep201:database.yml | server:db201:pg_shadow | client&#45;config:con201">
 <path fill="none" stroke="black" d="M243.373,-283C238.988,-283 234.603,-283 230.218,-283"/>
 <polygon fill="black" stroke="black" points="230.07,-281.25 225.07,-283 230.07,-284.75 230.07,-281.25"/>
 </a>
 </g>
 </g>
 <!-- db201&#45;&gt;ui201 -->
-<g id="db201_ui201" class="edge"><title>db201:s&#45;&gt;ui201:n</title>
-<g id="a_db201_ui201"><a xlink:title="Stores Business data, User Identity, db identity | access:localhost | client:ui201:database.yml | server:db201:pg_shadow | client&#45;config:con201 | server&#45;config:con201">
+<g id="edge3" class="edge"><title>db201:s&#45;&gt;ui201:n</title>
+<g id="a_edge3"><a xlink:title="Stores Business data, User Identity, db identity | access:localhost | client:ui201:database.yml | server:db201:pg_shadow | client&#45;config:con201 | server&#45;config:con201">
 <path fill="none" stroke="black" d="M193.311,-246.798C188.572,-230.378 161,-234.1 161,-213.5"/>
 <polygon fill="black" stroke="black" points="191.608,-247.273 194,-252 195.078,-246.813 191.608,-247.273"/>
 </a>
@@ -196,8 +196,8 @@
 <text text-anchor="middle" x="427" y="-174.3" font-family="Helvetica,sans-Serif" font-size="14.00">worker</text>
 </g>
 <!-- db201&#45;&gt;wk202a -->
-<g id="db201_wk202a" class="edge"><title>db201:s&#45;&gt;wk202a</title>
-<g id="a_db201_wk202a"><a xlink:title="client:wk202a:database.yml | server:db201:pg_shadow | client&#45;config:con201">
+<g id="edge12" class="edge"><title>db201:s&#45;&gt;wk202a</title>
+<g id="a_edge12"><a xlink:title="client:wk202a:database.yml | server:db201:pg_shadow | client&#45;config:con201">
 <path fill="none" stroke="black" d="M197.533,-248.283C216.802,-239.787 308.794,-247.315 321,-244 346.066,-237.193 372.136,-224.127 392.149,-212.611"/>
 <polygon fill="black" stroke="black" points="196.176,-247.17 194,-252 198.713,-249.581 196.176,-247.17"/>
 </a>
@@ -211,8 +211,8 @@
 <text text-anchor="middle" x="102" y="-267.8" font-family="Helvetica,sans-Serif" font-size="14.00">session</text>
 </g>
 <!-- mem201&#45;&gt;ui201 -->
-<g id="mem201_ui201" class="edge"><title>mem201:s&#45;&gt;ui201:n</title>
-<g id="a_mem201_ui201"><a xlink:title="access:localhost">
+<g id="edge5" class="edge"><title>mem201:s&#45;&gt;ui201:n</title>
+<g id="a_edge5"><a xlink:title="access:localhost | client:ui201 | server:mem201">
 <path fill="none" stroke="black" d="M102.584,-253.712C108.712,-228.13 161,-244.674 161,-213.5"/>
 <polygon fill="black" stroke="black" points="100.809,-253.838 102,-259 104.288,-254.222 100.809,-253.838"/>
 </a>
@@ -229,24 +229,24 @@
 </g>
 </g>
 <!-- pam201&#45;&gt;ldp301 -->
-<g id="pam201_ldp301" class="edge"><title>pam201&#45;&gt;ldp301</title>
-<g id="a_pam201_ldp301"><a xlink:title="password from ">
+<g id="edge22" class="edge"><title>pam201&#45;&gt;ldp301</title>
+<g id="a_edge22"><a xlink:title="password | client:pam201 | server:ldp301 ">
 <path fill="none" stroke="black" d="M69.878,-83.3664C62.5286,-73.2765 53.7737,-61.2572 46.0969,-50.7177"/>
 <polygon fill="black" stroke="black" points="47.4609,-49.618 43.1025,-46.6068 44.6318,-51.6787 47.4609,-49.618"/>
 </a>
 </g>
 </g>
 <!-- ui201&#45;&gt;ldp301 -->
-<g id="ui201_ldp301" class="edge"><title>ui201&#45;&gt;ldp301</title>
-<g id="a_ui201_ldp301"><a xlink:title="ruby ldap code | client:ui201:vmdb.yml | client:ui201:v2_key | client&#45;config:ui201">
+<g id="edge21" class="edge"><title>ui201&#45;&gt;ldp301</title>
+<g id="a_edge21"><a xlink:title="ruby ldap code | client:ui201:vmdb.yml | client:ui201:v2_key | client&#45;config:ui201 | server:ldp301">
 <path fill="none" stroke="black" d="M131.351,-180.594C105.883,-172.243 70.1754,-156.528 50,-130 32.8033,-107.389 27.9065,-74.5791 26.7735,-51.5683"/>
 <polygon fill="black" stroke="black" points="28.5204,-51.4523 26.5773,-46.5241 25.023,-51.5884 28.5204,-51.4523"/>
 </a>
 </g>
 </g>
 <!-- ui201&#45;&gt;iam1 -->
-<g id="iam1_ui201" class="edge"><title>ui201&#45;&gt;iam1</title>
-<g id="a_iam1_ui201"><a xlink:title="password from db101 | client:db201:authentications | client&#45;config:ui201 | server:iam1">
+<g id="edge18" class="edge"><title>ui201&#45;&gt;iam1</title>
+<g id="a_edge18"><a xlink:title="password from db101 | client:db201:authentications | client&#45;config:ui201 | server:iam1">
 <path fill="none" stroke="black" d="M186.358,-166.305C190.435,-163.288 194.724,-160.406 199,-158 230.735,-140.142 247.313,-152.43 276,-130 302.904,-108.964 323.217,-74.8305 335.082,-51.108"/>
 <polygon fill="black" stroke="black" points="336.708,-51.7686 337.342,-46.5093 333.566,-50.225 336.708,-51.7686"/>
 </a>
@@ -260,8 +260,8 @@
 <text text-anchor="middle" x="162" y="-91.3" font-family="Helvetica,sans-Serif" font-size="14.00">auth?</text>
 </g>
 <!-- ui201&#45;&gt;ap201 -->
-<g id="ui201_ap201" class="edge"><title>ui201:s&#45;&gt;ap201:n</title>
-<g id="a_ui201_ap201"><a xlink:title="mod_proxy connection | access:localhost">
+<g id="edge4" class="edge"><title>ui201:s&#45;&gt;ap201:n</title>
+<g id="a_edge4"><a xlink:title="mod_proxy connection | access:localhost | client:ap201 | server:ui201">
 <path fill="none" stroke="black" d="M161.038,-160.401C161.221,-148.632 162,-143.934 162,-130"/>
 <polygon fill="black" stroke="black" points="159.287,-160.487 161,-165.5 162.787,-160.513 159.287,-160.487"/>
 </a>
@@ -280,24 +280,24 @@
 <text text-anchor="middle" x="240" y="-102.8" font-family="Helvetica,sans-Serif" font-size="14.00">ssh</text>
 </g>
 <!-- con201&#45;&gt;ssh201 -->
-<g id="con201_ssh201" class="edge"><title>con201:s&#45;&gt;ssh201:n</title>
-<g id="a_con201_ssh201"><a xlink:title="access:localhost">
+<g id="edge6" class="edge"><title>con201:s&#45;&gt;ssh201:n</title>
+<g id="a_edge6"><a xlink:title="access:localhost | client:ssh201 | server:con201">
 <path fill="none" stroke="black" d="M240.971,-160.467C240.807,-146.678 240,-141.477 240,-125.5"/>
 <polygon fill="black" stroke="black" points="239.221,-160.51 241,-165.5 242.721,-160.49 239.221,-160.51"/>
 </a>
 </g>
 </g>
 <!-- ap201&#45;&gt;kdc301 -->
-<g id="ap201_kdc301" class="edge"><title>ap201&#45;&gt;kdc301</title>
-<g id="a_ap201_kdc301"><a xlink:title="client:ap201:keytab | client&#45;config:con201:ipa&#45;config">
+<g id="edge20" class="edge"><title>ap201&#45;&gt;kdc301</title>
+<g id="a_edge20"><a xlink:title="client:ap201:keytab | client&#45;config:con201:ipa&#45;config | server:kdc201">
 <path fill="none" stroke="black" d="M144.785,-83.3664C136.937,-73.2765 127.589,-61.2572 119.392,-50.7177"/>
 <polygon fill="black" stroke="black" points="120.645,-49.4792 116.194,-46.6068 117.883,-51.628 120.645,-49.4792"/>
 </a>
 </g>
 </g>
 <!-- ap201&#45;&gt;pam201 -->
-<g id="ap201_pam201" class="edge"><title>ap201&#45;&gt;pam201</title>
-<g id="a_ap201_pam201"><a xlink:title="access:localhost">
+<g id="edge7" class="edge"><title>ap201&#45;&gt;pam201</title>
+<g id="a_edge7"><a xlink:title="access:localhost client:pam201 server:ap201">
 <path fill="none" stroke="black" d="M130.619,-106.5C126.494,-106.5 122.368,-106.5 118.242,-106.5"/>
 <polygon fill="black" stroke="black" points="118.016,-104.75 113.016,-106.5 118.016,-108.25 118.016,-104.75"/>
 </a>
@@ -307,14 +307,14 @@
 <g id="userp" class="node"><title>userp</title>
 <g id="a_userp"><a xlink:title="User with Password">
 <polygon fill="none" stroke="none" stroke-width="2" points="234,-41.5 198,-41.5 198,-5.5 234,-5.5 234,-41.5"/>
-<image xlink:href="user.svg" width="34px" height="36px" preserveAspectRatio="xMinYMin meet" x="199" y="-41.5"/>
+<image xlink:href="user.svg" width="36px" height="36px" preserveAspectRatio="xMinYMin meet" x="198" y="-41.5"/>
 <text text-anchor="middle" x="216" y="-8.5" font-family="Helvetica,sans-Serif" font-size="10.00">pass</text>
 </a>
 </g>
 </g>
 <!-- ap201&#45;&gt;userp -->
-<g id="ap201_userp" class="edge"><title>ap201:s&#45;&gt;userp:n</title>
-<g id="a_ap201_userp"><a xlink:title="password from user, passthrough rails logs | client:userp:password | server:db101:users">
+<g id="edge14" class="edge"><title>ap201:s&#45;&gt;userp:n</title>
+<g id="a_edge14"><a xlink:title="password from user, passthrough rails logs | client:userp:password | server:db201:users">
 <path fill="none" stroke="black" d="M162.606,-77.4569C168.539,-54.9058 216,-70.5005 216,-42.5"/>
 <polygon fill="black" stroke="black" points="160.86,-77.3268 162,-82.5 164.335,-77.7447 160.86,-77.3268"/>
 </a>
@@ -324,30 +324,30 @@
 <g id="userk" class="node"><title>userk</title>
 <g id="a_userk"><a xlink:title="User With Kerberos Ticket">
 <polygon fill="none" stroke="none" stroke-width="2" points="180,-41.5 144,-41.5 144,-5.5 180,-5.5 180,-41.5"/>
-<image xlink:href="user.svg" width="34px" height="36px" preserveAspectRatio="xMinYMin meet" x="145" y="-41.5"/>
+<image xlink:href="user.svg" width="36px" height="36px" preserveAspectRatio="xMinYMin meet" x="144" y="-41.5"/>
 <text text-anchor="middle" x="162" y="-8.5" font-family="Helvetica,sans-Serif" font-size="10.00">sso</text>
 </a>
 </g>
 </g>
 <!-- ap201&#45;&gt;userk -->
-<g id="ap201_userk" class="edge"><title>ap201:s&#45;&gt;userk:n</title>
-<g id="a_ap201_userk"><a xlink:title="server config uses ipa&#45;config | client:file:keytab | server:pam201 | client&#45;config:kdc301:kinit | server&#45;config:con201">
+<g id="edge15" class="edge"><title>ap201:s&#45;&gt;userk:n</title>
+<g id="a_edge15"><a xlink:title="server config uses ipa&#45;config | client:file:keytab | server:pam201 | client&#45;config:kdc301:kinit | server&#45;config:con201">
 <path fill="none" stroke="black" d="M162,-77.468C162,-63.6819 162,-58.4722 162,-42.5"/>
 <polygon fill="black" stroke="black" points="160.25,-77.5 162,-82.5 163.75,-77.5 160.25,-77.5"/>
 </a>
 </g>
 </g>
 <!-- ssh201&#45;&gt;pam201 -->
-<g id="ssh201_pam201" class="edge"><title>ssh201&#45;&gt;pam201</title>
-<g id="a_ssh201_pam201"><a xlink:title="access:localhost">
+<g id="edge8" class="edge"><title>ssh201&#45;&gt;pam201</title>
+<g id="a_edge8"><a xlink:title="access:localhost client:pam201 server:ssh201">
 <path fill="none" stroke="black" d="M223.027,-124.685C214.781,-132.202 204.232,-140.068 193,-144 166.992,-153.104 156.91,-153.381 131,-144 124.163,-141.525 117.635,-137.507 111.776,-133.001"/>
 <polygon fill="black" stroke="black" points="112.822,-131.596 107.832,-129.817 110.623,-134.319 112.822,-131.596"/>
 </a>
 </g>
 </g>
 <!-- ssh201&#45;&gt;userp -->
-<g id="ssh201_userp" class="edge"><title>ssh201:s&#45;&gt;userp:n</title>
-<g id="a_ssh201_userp"><a xlink:title="password from user | client:userp:password | server:ssh201:/etc/passwd">
+<g id="edge16" class="edge"><title>ssh201:s&#45;&gt;userp:n</title>
+<g id="a_edge16"><a xlink:title="password from user | client:userp:password | server:ssh201:/etc/passwd">
 <path fill="none" stroke="black" d="M239.499,-82.1366C236.052,-64.7208 216,-63.2188 216,-42.5"/>
 <polygon fill="black" stroke="black" points="237.792,-82.6846 240,-87.5 241.277,-82.3588 237.792,-82.6846"/>
 </a>
@@ -357,118 +357,127 @@
 <g id="userc" class="node"><title>userc</title>
 <g id="a_userc"><a xlink:title="User With SSL Cert">
 <polygon fill="none" stroke="none" stroke-width="2" points="288,-41.5 252,-41.5 252,-5.5 288,-5.5 288,-41.5"/>
-<image xlink:href="user.svg" width="34px" height="36px" preserveAspectRatio="xMinYMin meet" x="253" y="-41.5"/>
+<image xlink:href="user.svg" width="36px" height="36px" preserveAspectRatio="xMinYMin meet" x="252" y="-41.5"/>
 <text text-anchor="middle" x="270" y="-8.5" font-family="Helvetica,sans-Serif" font-size="10.00">ssl</text>
 </a>
 </g>
 </g>
 <!-- ssh201&#45;&gt;userc -->
-<g id="ssh201_userc" class="edge"><title>ssh201:s&#45;&gt;userc:n</title>
-<g id="a_ssh201_userc"><a xlink:title="client:userc:id_rsa | server:ssh201:id_rsa.pub | client&#45;config:userc:ssh&#45;keygen | server&#45;config:userc:ssh&#45;copy&#45;id">
+<g id="edge17" class="edge"><title>ssh201:s&#45;&gt;userc:n</title>
+<g id="a_edge17"><a xlink:title="client:userc:id_rsa | server:ssh201:id_rsa.pub | client&#45;config:userc:ssh&#45;keygen | server&#45;config:userc:ssh&#45;copy&#45;id">
 <path fill="none" stroke="black" d="M240.521,-82.3369C244.504,-63.7778 270,-64.6591 270,-42.5"/>
 <polygon fill="black" stroke="black" points="238.761,-82.3496 240,-87.5 242.243,-82.7009 238.761,-82.3496"/>
 </a>
 </g>
 </g>
 <!-- wk202a&#45;&gt;cloud2 -->
-<g id="cloud2_wk202a" class="edge"><title>wk202a&#45;&gt;cloud2</title>
-<g id="a_cloud2_wk202a"><a xlink:title="password stored in database and decoded with v2_key | client:db101:authentications | client:wk202a:v2_key | server:cloud2:password">
+<g id="edge19" class="edge"><title>wk202a&#45;&gt;cloud2</title>
+<g id="a_edge19"><a xlink:title="password stored in database and decoded with v2_key | client:db101:authentications | client:wk202a:v2_key | server:cloud2:password">
 <path fill="none" stroke="black" d="M429.562,-166.382C433.014,-136.588 439.153,-83.6033 442.872,-51.4957"/>
 <polygon fill="black" stroke="black" points="444.611,-51.6968 443.448,-46.5286 441.134,-51.294 444.611,-51.6968"/>
 </a>
 </g>
 </g>
 <!-- userk&#45;&gt;kdc301 -->
-<g id="userp_kdc301" class="edge"><title>userk&#45;&gt;kdc301</title>
+<g id="edge23" class="edge"><title>userk&#45;&gt;kdc301</title>
+<g id="a_edge23"><a xlink:title="ticket from kerberos | client:userp:password | client&#45;config:userp:kinit">
 <path fill="none" stroke="black" d="M143.754,-23.5C139.61,-23.5 135.465,-23.5 131.32,-23.5"/>
 <polygon fill="black" stroke="black" points="131.07,-21.7501 126.07,-23.5 131.07,-25.2501 131.07,-21.7501"/>
+</a>
+</g>
 </g>
 </g>
 </svg>
 
 </div>
 <div id="desc-wrap">
-  <div id="choices">
-    <form id="config-form">
-      <label><input type="radio" name="config" id="c_all" value="" checked="true">all</label><br>
-      <label><input type="radio" name="config" id="c_database" value="database">database</label><br>
-      <label><input type="radio" name="config" id="c_ldap" value="ldap">ldap</label><br>
-      <label><input type="radio" name="config" id="c_amazon" value="amazon">amazon</label><br>
-      <label><input type="radio" name="config" id="c_external" value="external">external (idm password)</label><br>
-      <label><input type="radio" name="config" id="c_sso" value="sso">sso (kerberos tickets)</label>
-    </form>
-  </div>
   <div id="desc">
-    <p>a</p>
-    <p>b</p>
+    <div class="src-dest"></div>
+    <div class="active"></div>
   </div>
 </div>
 <script>
 /* selecting an edge is difficult */
 /* instead of relying upon mouseover/mouseout, having mouseover sticky */
 
-var current_node = null;
-var old_nodes=[];
+var current_edge = {};
 
-/* used for hilighting */
-function markClass(id, className) {
+function markClass(id, className, enabled) {
   if (id && className) {
-    d3.select("#"+id).classed(className, true)
-    old_nodes.push(["#"+id, className]);
+    d3.select("#"+id).classed(className, enabled)
   }
 }
 
-function cleanupEdge(id) {
-  // cleanup last highlight
-  while(node = old_nodes.pop()) {
-    d3.select(node[0]).classed(node[1], false);
+function displayRelations(datum, nodeClass, enabled) {
+  if (!datum)
+    return;
+  markClass(datum.id, nodeClass, enabled);
+  for(var n in datum) {
+    if(n != "desc" && n != "id") {
+      markClass(datum[n], n, enabled)
+    }
   }
+  var desc = enabled ? (datum.desc || "") : "";
+  d3.select("#desc ."+nodeClass).html(desc);
 }
 
-function displayEdge(id) {
-  markClass(id, 'src-dest');
-  // these are going away - infoText should provide everything
-  var ids = id.split('_');
-  markClass(ids[0], 'src');
-  markClass(ids[1], 'dest');
-
-  var info = d3.select("#"+id+" a")
-  if (info) {
+function extractDatum(node, datum) {
+  var info = d3.select(node).select("a")
+  if (info && info[0] && info[0][0]) {
     info = info.attr("xlink:title");
-    console.debug(id, "info", info);
+  } else {
+    info = null;
   }
-  // just display everything for now (in future, only attr that have no ':')
-  var infoText = (info || "");
-
   if (info) {
     var attrs = info.split("|")
+    // class:id:filename - class = (config|client|server|client_config|server_config)
     for(var attr_num = 0; attr_num < attrs.length ; attr_num++) {
       var attr = attrs[attr_num].trim();
       attr_parts = attr.split(":")
-      markClass(attr_parts[1], attr_parts[0]);
+      if (attr_parts[1]) {
+        // TODO: handle duplicate attributes?
+        datum[attr_parts[0]] = attr_parts[1];
+        // TODO: add specific support for 3rd parameter (tablename/filename)
+        // if (attr_parts[2])
+        //   attr["filename"] = attr_parts[2];
+      } else {
+        datum["desc"] = attr_parts[0];
+      }
     }
   }
-  //console.debug(id, "infoText", infoText);
-  d3.select("#desc").html(infoText);
-
-  // debug only
-  for(var i=0; i< old_nodes.length ; i++) {
-    console.debug(id, old_nodes[i])
-  }
+  return datum;
 }
 
-d3.selectAll(".node").on('mouseover', function() {
-  d3.select(this).classed('active', true)
-}).on('mouseout', function() {
-  d3.select(this).classed('active', false)
+/* work around dot not supporting attribute `class="x"` */
+function hackClass(node, datum) {
+  if (datum["class"]) {
+    d3.select(node).classed(datum["class"], true);
+    delete datum["class"];
+  }
+  return datum;
+}
+
+d3.selectAll(".node").datum(function() {
+  return hackClass(this, extractDatum(this, {"id" : this.id}));
+})
+.on('mouseover', function(datum) {
+  displayRelations(datum, 'active', true)
+})
+.on('mouseout', function(datum) {
+  displayRelations(datum, 'active', false)
 });
 
-/* since it is hard to highlight, doing mouseout/mouseover when mouseover a new edge */
-d3.selectAll(".edge").on('mouseover', function() {
-  if (this.id != current_node) {
-    cleanupEdge(current_node);
-    current_node = this.id;
-    displayEdge(this.id);
+d3.selectAll(".edge").datum(function(){
+  return extractDatum(this, {"id" : this.id});
+})
+.on('mouseover', function(datum) {
+/*  since it is hard to select a line using mouseover/mouseout,
+ *   implementing mouseover with logic of both
+ */
+  if (datum.id != current_edge.id) {
+    displayRelations(current_edge, 'src-dest', false);
+    current_edge = datum;
+    displayRelations(datum, 'src-dest', true);
   }
 }); 
 </script>

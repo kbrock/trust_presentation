@@ -21,52 +21,36 @@
 </div>
 <div id="desc-wrap">
   <div id="desc">
+    <div class="src-dest"></div>
+    <div class="active"></div>
   </div>
 </div>
 <script>
 /* selecting an edge is difficult */
 /* instead of relying upon mouseover/mouseout, having mouseover sticky */
 
-var current_node = null;
-var old_nodes=[];
+var current_edge = {};
 
-/* used for hilighting */
-function markClass(id, className) {
+function markClass(id, className, enabled) {
   if (id && className) {
-    d3.select("#"+id).classed(className, true)
-    old_nodes.push(["#"+id, className]);
+    d3.select("#"+id).classed(className, enabled)
   }
 }
 
-function cleanupEdge(id) {
-  // cleanup last highlight
-  while(node = old_nodes.pop()) {
-    d3.select(node[0]).classed(node[1], false);
-  }
-}
-
-function displayEdge(datum) {
-  markClass(datum.id, 'src-dest');
-  //markClass(datum.client, 'src');
-  //markClass(datum.server, 'dest');
-  var id = datum.id;
+function displayRelations(datum, nodeClass, enabled) {
+  if (!datum)
+    return;
+  markClass(datum.id, nodeClass, enabled);
   for(var n in datum) {
     if(n != "desc" && n != "id") {
-      console.debug("["+n+"]", datum[n]);
-      markClass(datum[n], n)
+      markClass(datum[n], n, enabled)
     }
   }
-  d3.select("#desc").html(datum.desc || "");
+  var desc = enabled ? (datum.desc || "") : "";
+  d3.select("#desc ."+nodeClass).html(desc);
 }
 
 function extractDatum(node, datum) {
-  // legacy
-  var ids = node["id"].split('_');
-  if(ids[1]) {
-    datum["client"] = ids[0];
-    datum["server"] = ids[1];
-  }
-
   var info = d3.select(node).select("a")
   if (info && info[0] && info[0][0]) {
     info = info.attr("xlink:title");
@@ -93,32 +77,36 @@ function extractDatum(node, datum) {
   return datum;
 }
 
-d3.selectAll(".node").on('mouseover', function() {
-  d3.select(this).classed('active', true)
-}).on('mouseout', function() {
-  d3.select(this).classed('active', false)
-});
-d3.selectAll(".node").datum(function() {
-  var datum = extractDatum(this, {"id" : this.id});
+/* work around dot not supporting attribute `class="x"` */
+function hackClass(node, datum) {
   if (datum["class"]) {
-    d3.select(this).classed(datum["class"], true);
+    d3.select(node).classed(datum["class"], true);
     delete datum["class"];
   }
+  return datum;
+}
 
-  return datum;
-});
-d3.selectAll(".edge").datum(function(){
-  var datum = extractDatum(this, {"id" : this.id});
-  return datum;
+d3.selectAll(".node").datum(function() {
+  return hackClass(this, extractDatum(this, {"id" : this.id}));
 })
 .on('mouseover', function(datum) {
-/*  it is hard to select a line using mouseover/mouseout
- *  instead just changing selection on mouseover
+  displayRelations(datum, 'active', true)
+})
+.on('mouseout', function(datum) {
+  displayRelations(datum, 'active', false)
+});
+
+d3.selectAll(".edge").datum(function(){
+  return extractDatum(this, {"id" : this.id});
+})
+.on('mouseover', function(datum) {
+/*  since it is hard to select a line using mouseover/mouseout,
+ *   implementing mouseover with logic of both
  */
-  if (this.id != current_node) {
-    cleanupEdge(current_node);
-    current_node = this.id;
-    displayEdge(datum);
+  if (datum.id != current_edge.id) {
+    displayRelations(current_edge, 'src-dest', false);
+    current_edge = datum;
+    displayRelations(datum, 'src-dest', true);
   }
 }); 
 </script>
